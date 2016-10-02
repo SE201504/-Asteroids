@@ -11,6 +11,7 @@
 int start(void)
 {
 
+
     bool ifselect = true;
     enum SET_KEYS{SET_UP, SET_DOWN, ENTER};
     bool set_keys[3] = {false, false, false};
@@ -24,6 +25,8 @@ int start(void)
     ALLEGRO_FONT *font56 = NULL;
     ALLEGRO_FONT *font32 = NULL;
     ALLEGRO_BITMAP *setbackimage = NULL;//back image
+
+
 
     if(!al_init()){
         return -1;
@@ -41,10 +44,12 @@ int start(void)
     al_init_font_addon();
     al_init_ttf_addon();
 
+    al_set_window_position(display,0,0);
     display = al_create_display(SCREEN_W,SCREEN_H);
     if(!display){
         return -1;
     }
+
 
     font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
     font32 = al_load_font("../nonespace/img/fontl.ttf",32,0);
@@ -60,6 +65,7 @@ int start(void)
 
     al_clear_to_color(al_map_rgb(0,0,0));
     al_flip_display();
+
     al_start_timer(timer);//开始计时器
     int count = 0;
 

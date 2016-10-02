@@ -37,6 +37,7 @@ int selects(void)
     if(!al_install_keyboard()){
         return -1;
     }
+    al_set_window_position(display,0,0);
 
     al_init_font_addon();
     al_init_ttf_addon();

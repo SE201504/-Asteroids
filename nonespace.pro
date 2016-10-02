@@ -10,7 +10,8 @@ SOURCES += \
     start.c \
     select.c \
     run.c \
-    spaceship.c
+    spaceship.c \
+    blast.c
 
 HEADERS += \
     main.h \
@@ -18,7 +19,8 @@ HEADERS += \
     start.h \
     select.h \
     run.h \
-    spaceship.h
+    spaceship.h \
+    blast.h
 
 DISTFILES +=
 

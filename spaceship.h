@@ -5,8 +5,6 @@
 typedef struct{
     float sx;
     float sy;
-    float heading;
-    float speed;
     int score;
     int time;
     int gone;
@@ -19,7 +17,7 @@ typedef struct{
     int bitmap_s_w;
 } Spaceship;
 
-void init_spaceship(Spaceship* s);
+void init_spaceship(Spaceship* s, int level);
 void draw_spaceship(Spaceship *s);
 void ship_live(Spaceship *s);
 

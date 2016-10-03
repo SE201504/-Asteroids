@@ -5,6 +5,7 @@
  */
 
 #include "main.h"
+#include "gif/algif.h"
 #include "select.h"
 #include "run.h"
 
@@ -24,6 +25,8 @@ int selects(void)
     ALLEGRO_FONT *font56 = NULL;
     ALLEGRO_FONT *font32 = NULL;
     ALLEGRO_BITMAP *setbackimage = NULL;//back image
+
+    ALGIF_ANIMATION *gif;
 
     if(!al_init()){
         return -1;
@@ -51,6 +54,7 @@ int selects(void)
     font32 = al_load_font("../nonespace/img/fontl.ttf",32,0);
     font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
     setbackimage = al_load_bitmap("../nonespace/img/start.jpg");
+    gif = algif_load_animation("../nonespace/gif/boom1.gif");
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
     event_queue = al_create_event_queue();//创建事件队列
@@ -164,6 +168,7 @@ int selects(void)
             else if(ifrun && al_is_event_queue_empty(event_queue ))
             {
                 al_draw_text(font56,al_map_rgb(0,0,0),SCREEN_W/2,SCREEN_H/6,ALLEGRO_ALIGN_CENTER,"<Asteroids>");
+                al_draw_bitmap(algif_get_bitmap(gif,al_get_time()),200, 200, 0);
 
                 al_flip_display();
             }

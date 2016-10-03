@@ -11,7 +11,11 @@ SOURCES += \
     select.c \
     run.c \
     spaceship.c \
-    blast.c
+    blast.c \
+    gif/gif.c \
+    gif/lzw.c \
+    gif/bitmap.c \
+    gif/algif.c
 
 HEADERS += \
     main.h \
@@ -20,7 +24,8 @@ HEADERS += \
     select.h \
     run.h \
     spaceship.h \
-    blast.h
+    blast.h \
+    gif/algif.h
 
 DISTFILES +=
 

@@ -20,6 +20,15 @@ void init_spaceship(Spaceship* s,int level)
     s->bitmap_h = al_get_bitmap_height(s->bitmap);
     s->bitmap_s_w = al_get_bitmap_width(s->bitmap_s);
     s->bitmap_s_h = al_get_bitmap_height(s->bitmap_s);
+    } else
+    if(level == 2)
+    {
+    s->bitmap = al_load_bitmap("../nonespace/img/spaceship2.png");
+    s->bitmap_s = al_load_bitmap("../nonespace/img/spaceship_moving.png");
+    s->bitmap_w = al_get_bitmap_width(s->bitmap);
+    s->bitmap_h = al_get_bitmap_height(s->bitmap);
+    s->bitmap_s_w = al_get_bitmap_width(s->bitmap_s);
+    s->bitmap_s_h = al_get_bitmap_height(s->bitmap_s);
     }
 }
 

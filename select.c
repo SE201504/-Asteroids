@@ -141,12 +141,12 @@ int selects(void)
             case 0:
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<level 1>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
+                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<level 2>");
                 break;
             case 1:
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<level 1>");
+                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<level 2>");
 
                 break;
             }
@@ -162,7 +162,10 @@ int selects(void)
             else if((set_keys[ENTER] || click_mouse2) && (count%2 == 1))
             {
 
+                ifrun = false;
+
                 al_destroy_display(display);
+                run(2);
             }
 
             else if(ifrun && al_is_event_queue_empty(event_queue ))

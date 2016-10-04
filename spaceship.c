@@ -1,5 +1,7 @@
 #include "main.h"
 #include "spaceship.h"
+#include "weapen.h"
+#include "blast.h"
 
 
 void init_spaceship(Spaceship* s,int level)
@@ -101,4 +103,15 @@ void ship_live(Spaceship *s)
 
 }
 
+void spaceship_hit_weapen(Spaceship *s, Weapen *weapen,int* weapen_class)
+{
 
+
+    if(weapen->live) {
+        if((pow((s->sx - weapen->sx),2) + pow((s->sy - weapen->sy),2))  < 200){
+                weapen->live = false;
+                *weapen_class = 2;
+        }
+    }
+
+}

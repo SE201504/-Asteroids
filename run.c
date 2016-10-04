@@ -1,6 +1,8 @@
 #include "main.h"
 #include "spaceship.h"
 #include "blast.h"
+#include "weapen.h"
+#include "enemy.h"
 
 
 
@@ -8,7 +10,8 @@ int run(int level)
 {
 
     bool redraw;
-    int weapen = 2;//weapen level
+    int weapen_class = 1;//weapen level
+    int runtime = 0;
 
     //类型声明
     ALLEGRO_DISPLAY *display = NULL;
@@ -23,8 +26,9 @@ int run(int level)
 
     //结构体声明
     Spaceship *s = malloc(sizeof(Spaceship));
-
+    Weapen *weapen = malloc(sizeof(Weapen));
     Blast blast[BLAST_NUM];
+    Enemy enemy[ENEMY_NUMBER];
 
 
     //显示系统初始化
@@ -51,6 +55,7 @@ int run(int level)
 
     display = al_create_display(SCREEN_W,SCREEN_H);
     al_hide_mouse_cursor(display);
+
     backimage = al_load_bitmap("../nonespace/img/backimage.jpg");
     font24 = al_load_font("../Spaceship/img/fontl.ttf",24,0);
     font56 = al_load_font("../Spaceship/img/fontl.ttf",56,0);
@@ -66,7 +71,9 @@ int run(int level)
 
     //结构体初始化
     init_spaceship(s,level);
-    init_blast(blast,weapen);
+    init_blast(blast,weapen_class);
+    init_weapen(weapen);
+    init_enemy(enemy);
 
 
 
@@ -88,10 +95,11 @@ int run(int level)
                 s->sy = event.mouse.y;
             }
             else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                fire_blast(blast,s,weapen);
+                fire_blast(blast,s,weapen_class);
             }
             else if(event.type == ALLEGRO_EVENT_TIMER)
             {
+                al_clear_to_color(al_map_rgb(255,255,255));
                 ALLEGRO_TRANSFORM transform;
                 al_identity_transform(&transform);
                 al_translate_transform(&transform, 0, 0);
@@ -101,12 +109,19 @@ int run(int level)
 
 
                 s->time++;
+                runtime++;
+                re_init_weapen(weapen,runtime);
+                init_new_enemy(enemy,runtime);
 
 
                 move_blast(blast);
+                move_enemy(enemy);
 
 
                 // 碰撞检测系统
+
+
+                spaceship_hit_weapen(s,weapen,&weapen_class);
 
                 redraw = true;
                 if(redraw && al_is_event_queue_empty(event_queue))
@@ -115,9 +130,10 @@ int run(int level)
 
                     //各种对象绘制
                     ship_live(s);
+                    draw_enemy(enemy);
                     draw_spaceship(s);
-
-                    draw_blast(blast,weapen);
+                    draw_weapen(weapen);
+                    draw_blast(blast,weapen_class);
 
                     al_flip_display();
                     redraw = false;

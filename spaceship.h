@@ -1,6 +1,7 @@
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 #include "main.h"
+#include "weapen.h"
 
 typedef struct{
     float sx;
@@ -20,5 +21,6 @@ typedef struct{
 void init_spaceship(Spaceship* s, int level);
 void draw_spaceship(Spaceship *s);
 void ship_live(Spaceship *s);
+void spaceship_hit_weapen(Spaceship *s , Weapen *weapen, int *weapen_class);
 
 #endif // SPACESHIP_H

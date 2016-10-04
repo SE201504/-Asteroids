@@ -18,7 +18,7 @@ void init_blast(Blast blast[],int weapen)
         }
         if(weapen == 2){
             blast[i].speed = 10;
-            blast[i].bitmap = al_load_bitmap("../nonespace/img/blast.png");
+            blast[i].bitmap = al_load_bitmap("../nonespace/img/blast2.png");
             blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
             blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
         }

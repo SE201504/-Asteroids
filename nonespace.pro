@@ -15,7 +15,9 @@ SOURCES += \
     gif/gif.c \
     gif/lzw.c \
     gif/bitmap.c \
-    gif/algif.c
+    gif/algif.c \
+    weapen.c \
+    enemy.c
 
 HEADERS += \
     main.h \
@@ -25,7 +27,9 @@ HEADERS += \
     run.h \
     spaceship.h \
     blast.h \
-    gif/algif.h
+    gif/algif.h \
+    weapen.h \
+    enemy.h
 
 DISTFILES +=
 

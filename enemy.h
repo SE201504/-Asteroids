@@ -1,6 +1,8 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 #include "main.h"
+#include "spaceship.h"
+#include "blast.h"
 
 #define ENEMY_NUMBER 3
 
@@ -17,10 +19,11 @@ typedef struct{
 
 } Enemy;
 
-void init_enemy(Enemy a[]);
+void init_enemy(Enemy a[], int level, int type);
 void draw_enemy(Enemy a[]);
-void move_enemy(Enemy a[]);
+void move_enemy(Enemy a[],Spaceship *s,int type);
 void init_new_enemy(Enemy a[],int runtime);
+void hit_enemy(Blast blast[], Enemy a[], Enemy b[], Spaceship *s);
 
 
 #endif // ENEMY_H

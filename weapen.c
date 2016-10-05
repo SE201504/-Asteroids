@@ -29,7 +29,7 @@ void draw_weapen(Weapen *weapen)
     al_translate_transform(&transform, weapen->sx, weapen->sy);
     al_use_transform(&transform);
 
-    al_draw_bitmap(weapen->bitmap,0,0,0);
+    al_draw_bitmap(weapen->bitmap,-weapen->bitmap_w/2,-weapen->bitmap_h/2,0);
     }
 
 }

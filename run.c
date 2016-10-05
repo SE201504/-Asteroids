@@ -28,7 +28,9 @@ int run(int level)
     Spaceship *s = malloc(sizeof(Spaceship));
     Weapen *weapen = malloc(sizeof(Weapen));
     Blast blast[BLAST_NUM];
+    Blast blast2[BLAST_NUM];
     Enemy enemy[ENEMY_NUMBER];
+    Enemy enemy2[ENEMY_NUMBER];
 
 
     //显示系统初始化
@@ -71,9 +73,11 @@ int run(int level)
 
     //结构体初始化
     init_spaceship(s,level);
-    init_blast(blast,weapen_class);
+    init_blast(blast);
+    init_blast2(blast2);
     init_weapen(weapen);
-    init_enemy(enemy);
+    init_enemy(enemy,level,1);
+    init_enemy(enemy2,level,2);
 
 
 
@@ -95,7 +99,7 @@ int run(int level)
                 s->sy = event.mouse.y;
             }
             else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-                fire_blast(blast,s,weapen_class);
+                fire_blast(blast,blast2,s,weapen_class);
             }
             else if(event.type == ALLEGRO_EVENT_TIMER)
             {
@@ -112,16 +116,20 @@ int run(int level)
                 runtime++;
                 re_init_weapen(weapen,runtime);
                 init_new_enemy(enemy,runtime);
+                init_new_enemy(enemy2,runtime);
 
 
                 move_blast(blast);
-                move_enemy(enemy);
+                move_blast(blast2);
+                move_enemy(enemy,s,1);
+                move_enemy(enemy2,s,2);
 
 
                 // 碰撞检测系统
 
 
                 spaceship_hit_weapen(s,weapen,&weapen_class);
+                hit_enemy(blast,enemy,enemy2,s);
 
                 redraw = true;
                 if(redraw && al_is_event_queue_empty(event_queue))
@@ -131,9 +139,11 @@ int run(int level)
                     //各种对象绘制
                     ship_live(s);
                     draw_enemy(enemy);
+                    draw_enemy(enemy2);
                     draw_spaceship(s);
                     draw_weapen(weapen);
-                    draw_blast(blast,weapen_class);
+                    draw_blast(blast);
+                    draw_blast2(blast2);
 
                     al_flip_display();
                     redraw = false;

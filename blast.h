@@ -4,7 +4,7 @@
 #include "main.h"
 #include "spaceship.h"
 
-#define BLAST_NUM  10
+#define BLAST_NUM  20
 typedef struct{
     float sx;
     float sy;
@@ -16,9 +16,11 @@ typedef struct{
     int bitmap_w;
 }Blast;
 //
-void init_blast(Blast blast[], int weapen);
-void fire_blast(Blast blast[], Spaceship *s, int weapen);
-void draw_blast(Blast blast[], int weapen);
+void init_blast(Blast blast[]);
+void init_blast2(Blast blast[]);
+void fire_blast(Blast blast[], Blast blast2[], Spaceship *s, int weapen);
+void draw_blast(Blast blast[]);
+void draw_blast2(Blast blast[]);
 void move_blast(Blast blast[]);
 void check(Blast blast[]);
 

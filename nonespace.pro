@@ -17,7 +17,8 @@ SOURCES += \
     gif/bitmap.c \
     gif/algif.c \
     weapen.c \
-    enemy.c
+    enemy.c \
+    boss.c
 
 HEADERS += \
     main.h \
@@ -29,7 +30,8 @@ HEADERS += \
     blast.h \
     gif/algif.h \
     weapen.h \
-    enemy.h
+    enemy.h \
+    boss.h
 
 DISTFILES +=
 

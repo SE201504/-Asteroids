@@ -3,6 +3,7 @@
 #include "blast.h"
 #include "weapen.h"
 #include "enemy.h"
+#include "boss.h"
 
 
 
@@ -25,12 +26,14 @@ int run(int level)
 
 
     //结构体声明
-    Spaceship *s = malloc(sizeof(Spaceship));
-    Weapen *weapen = malloc(sizeof(Weapen));
+    Spaceship *s = (Spaceship*)malloc(sizeof(Spaceship));
+    Weapen *weapen = (Weapen*)malloc(sizeof(Weapen));
     Blast blast[BLAST_NUM];
     Blast blast2[BLAST_NUM];
     Enemy enemy[ENEMY_NUMBER];
     Enemy enemy2[ENEMY_NUMBER];
+    Boss *b = (Boss*)malloc(sizeof(Boss));
+
 
 
     //显示系统初始化
@@ -78,6 +81,7 @@ int run(int level)
     init_weapen(weapen);
     init_enemy(enemy,level,1);
     init_enemy(enemy2,level,2);
+    init_boss(b,level);
 
 
 
@@ -114,6 +118,7 @@ int run(int level)
 
                 s->time++;
                 runtime++;
+
                 re_init_weapen(weapen,runtime);
                 init_new_enemy(enemy,runtime);
                 init_new_enemy(enemy2,runtime);
@@ -123,6 +128,7 @@ int run(int level)
                 move_blast(blast2);
                 move_enemy(enemy,s,1);
                 move_enemy(enemy2,s,2);
+                move_boss(b,s,runtime);
 
 
                 // 碰撞检测系统
@@ -144,6 +150,7 @@ int run(int level)
                     draw_weapen(weapen);
                     draw_blast(blast);
                     draw_blast2(blast2);
+                    draw_boss(b,runtime);
 
                     al_flip_display();
                     redraw = false;

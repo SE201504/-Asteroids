@@ -31,6 +31,7 @@ int run(int level)
     Weapen *weapen = (Weapen*)malloc(sizeof(Weapen));
     Blast blast[BLAST_NUM];
     Blast blast2[BLAST_NUM];
+    Blast enemy_blast[BLAST_NUM];
     Enemy enemy[ENEMY_NUMBER];
     Enemy enemy2[ENEMY_NUMBER];
     Boss *b = (Boss*)malloc(sizeof(Boss));
@@ -72,6 +73,7 @@ int run(int level)
     al_register_event_source(event_queue, al_get_timer_event_source(timer));//获得计时器事件装入队列
     al_register_event_source(event_queue, al_get_display_event_source(display));//获得显示事件装入队列
     al_clear_to_color(al_map_rgb(0,0,0));
+
     al_flip_display();
 
 
@@ -79,6 +81,7 @@ int run(int level)
     init_spaceship(s,level);
     init_blast(blast);
     init_blast2(blast2);
+    init_enenmy_blast(enemy_blast);
     init_weapen(weapen);
     init_enemy(enemy,level,1);
     init_enemy(enemy2,level,2);
@@ -118,14 +121,17 @@ int run(int level)
 
 
                 s->time++;
+                b->time++;
                 runtime++;
 
                 re_init_weapen(weapen,runtime);
                 init_new_enemy(enemy,runtime,level,1);
                 init_new_enemy(enemy2,runtime,level,2);
+                fire_boss_blast(enemy_blast,b);
 
 
                 move_blast(blast);
+                move_enemy_blast(enemy_blast);
                 move_blast(blast2);
                 move_enemy(enemy,s,1);
                 move_enemy(enemy2,s,2);
@@ -151,6 +157,7 @@ int run(int level)
                     draw_weapen(weapen);
                     draw_blast(blast);
                     draw_blast2(blast2);
+                    draw_blast(enemy_blast);
                     draw_boss(b,runtime);
 
                     hit_enemy(blast,enemy,enemy2,s);

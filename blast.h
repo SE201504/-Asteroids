@@ -18,10 +18,12 @@ typedef struct{
 //
 void init_blast(Blast blast[]);
 void init_blast2(Blast blast[]);
+void init_enenmy_blast(Blast blast[]);
 void fire_blast(Blast blast[], Blast blast2[], Spaceship *s, int weapen);
 void draw_blast(Blast blast[]);
 void draw_blast2(Blast blast[]);
 void move_blast(Blast blast[]);
+void move_enemy_blast(Blast blast[]);
 void check(Blast blast[]);
 
 #endif // BLAST_H

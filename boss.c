@@ -8,7 +8,7 @@ void init_boss(Boss *s,int level)
 
     s->sx = 100;
     s->sy = -200;
-    s->speed = 1;
+    s->speed = 3;
     s->gone = 5;
     s->time=0;
     s->color = al_map_rgb(222,80,222);
@@ -83,6 +83,21 @@ void boss_hit_spaceship(Spaceship *s,Blast blast[])
 
 }
 
+void fire_boss_blast(Blast blast[],Boss *s)
+{
+    if(s->time % FPS == 0){
+    for(int i = 0; i < BLAST_NUM ; i++)
+    {
+        if(!blast[i].live)
+        {
+        blast[i].sx = s->sx;
+        blast[i].sy = s->sy;
+        blast[i].live = true;
+        break;
+        }
+    }
+    }
+}
 
 //void al_destory_enemy(Enemy *e){
 //    free(e);

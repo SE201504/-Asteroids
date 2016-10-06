@@ -17,6 +17,21 @@ void init_blast(Blast blast[])
     }
 }
 
+void init_enenmy_blast(Blast blast[])
+{
+
+    for(int i = 0; i < BLAST_NUM ; i++){
+
+        blast[i].sx = 0;
+        blast[i].sy = 0;
+        blast[i].live = false;
+            blast[i].speed = 9;
+            blast[i].bitmap = al_load_bitmap("../nonespace/img/laser.png");
+            blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
+            blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
+    }
+}
+
 void init_blast2(Blast blast[])
 {
     for(int i = 0; i < BLAST_NUM ; i++){
@@ -115,6 +130,18 @@ void move_blast(Blast blast[])
         if(blast[i].live)
         {
             blast[i].sy -= blast[i].speed ;
+            check(blast);
+        }
+    }
+}
+
+void move_enemy_blast(Blast blast[])
+{
+    for(int i = 0; i < BLAST_NUM; i++)
+    {
+        if(blast[i].live)
+        {
+            blast[i].sy += blast[i].speed ;
             check(blast);
         }
     }

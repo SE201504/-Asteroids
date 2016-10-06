@@ -23,7 +23,8 @@ void init_enemy(Enemy a[], int level, int type);
 void draw_enemy(Enemy a[]);
 void move_enemy(Enemy a[],Spaceship *s,int type);
 void init_new_enemy(Enemy a[],int runtime);
-void hit_enemy(Blast blast[], Enemy a[], Enemy b[], Spaceship *s);
+void hit_enemy(Blast blast[], Enemy a[],Enemy b[], Spaceship *s);
+void hit_enemy2(Blast blast[], Enemy a[],Enemy b[], Spaceship *s);
 
 
 #endif // ENEMY_H

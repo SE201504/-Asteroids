@@ -245,31 +245,69 @@ void hit_enemy(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
         {
             for(int j = 0; j < ENEMY_NUMBER; j++)
             {
-                if(a[i].live)
+                if(a[j].live)
                 {
-                    if((pow((a[i].sx - blast[i].sx),2) + pow((a[i].sy - blast[i].sy),2)) < 2000)
+                    if(sqrt((pow(a[j].sx - blast[i].sx,2) + pow(a[j].sy - blast[i].sy,2))) < a[j].bitmap_w/2 + blast[i].bitmap_w/2)
                     {
-                        a[i].live = false;
+                        a[j].live = false;
                         blast[i].live = false;
                         s->score +=100;
                     }
                 }
 
-                if(b[i].live)
+
+                if(b[j].live)
                 {
-                    if((pow((b[i].sx - blast[i].sx),2) + pow((b[i].sy - blast[i].sy),2)) < 800)
+                    if(sqrt((pow(b[j].sx - blast[i].sx,2) + pow(b[j].sy - blast[i].sy,2))) < b[j].bitmap_w/2 + blast[i].bitmap_w/2)
                     {
-                        if(i%2==0)
-                        {
+                        b[j].live = false;
                         blast[i].live = false;
-                        blast[i+1].live = false;
-                        } else if(i%2==1)
-                        {
+                        s->score +=100;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void hit_enemy2(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
+{
+    for(int i = 0; i < BLAST_NUM; i++)
+    {
+        if(blast[i].live)
+        {
+            for(int j = 0; j < ENEMY_NUMBER; j++)
+            {
+                if(a[j].live)
+                {
+                    if(sqrt((pow(a[j].sx - blast[i].sx,2) + pow(a[j].sy - blast[i].sy,2))) < a[j].bitmap_w/2 + blast[j].bitmap_w/2)
+                    {
+                        if(i%2 == 0) {
+                            blast[i].live = false;
+                            blast[i+1].live = false;
+                        } else if(i%2 == 1){
                             blast[i].live = false;
                             blast[i-1].live = false;
                         }
+                        a[j].live = false;
 
-                        b[i].live = false;
+                        s->score +=100;
+                    }
+                }
+
+
+                if(b[j].live)
+                {
+                    if(sqrt((pow(b[j].sx - blast[i].sx,2) + pow(b[j].sy - blast[i].sy,2))) < b[j].bitmap_w/2 + blast[i].bitmap_w/2)
+                    {
+                        if(i%2 == 0) {
+                            blast[i].live = false;
+                            blast[i+1].live = false;
+                        } else if(i%2 == 1){
+                            blast[i].live = false;
+                            blast[i-1].live = false;
+                        }
+                        b[j].live = false;
                         s->score +=100;
                     }
                 }

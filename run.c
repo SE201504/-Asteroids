@@ -136,6 +136,7 @@ int run(int level)
 
                 spaceship_hit_weapen(s,weapen,&weapen_class);
                 hit_enemy(blast,enemy,enemy2,s);
+                hit_enemy2(blast2,enemy,enemy2,s);
 
                 redraw = true;
                 if(redraw && al_is_event_queue_empty(event_queue))

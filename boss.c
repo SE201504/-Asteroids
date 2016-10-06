@@ -9,7 +9,8 @@ void init_boss(Boss *s,int level)
     s->sx = 100;
     s->sy = -200;
     s->speed = 3;
-    s->gone = 5;
+    s->life = 5;
+    s->live = false;
     s->time=0;
     s->color = al_map_rgb(222,80,222);
     if(level == 1)
@@ -23,18 +24,21 @@ void init_boss(Boss *s,int level)
 }
 
 
-void draw_boss(Boss *s,int runtime)
-{
+void draw_boss(Boss *s, int runtime)
+{   
     if(runtime > FPS * BOSS_TIME)
     {
-        if(s->gone !=0){
-            ALLEGRO_TRANSFORM transform;
-            al_identity_transform(&transform);
-            al_translate_transform(&transform, s->sx, s->sy);
-            al_use_transform(&transform);
-            al_draw_bitmap(s->bitmap,- s->bitmap_w/2,- s->bitmap_h/2,0);
+        s->live = true;
         }
+
+    if(s->live){
+        ALLEGRO_TRANSFORM transform;
+        al_identity_transform(&transform);
+        al_translate_transform(&transform, s->sx, s->sy);
+        al_use_transform(&transform);
+        al_draw_bitmap(s->bitmap,- s->bitmap_w/2,- s->bitmap_h/2,0);
     }
+
 
 }
 
@@ -42,7 +46,7 @@ void move_boss(Boss *b,Spaceship *s,int runtime)
 {
     if(runtime > FPS * BOSS_TIME)
     {
-        if(b->gone!=0)
+        if(b->live)
         {
 
             if(s->sx - b->sx >= 0){
@@ -67,35 +71,22 @@ void move_boss(Boss *b,Spaceship *s,int runtime)
 }
 
 
-void boss_hit_spaceship(Spaceship *s,Blast blast[])
-{
-            for(int i = 0; i < BLAST_NUM;i++)
-            {
-                if(blast[i].live)
-                {
-
-                    if((pow((blast[i].sx - s->sx),2) + pow((blast[i].sy - s->sy),2))  < 500){
-                        blast[i].live = false;
-                        s->gone --;
-                }
-                }
-            }
-
-}
-
 void fire_boss_blast(Blast blast[],Boss *s)
 {
-    if(s->time % FPS == 0){
-    for(int i = 0; i < BLAST_NUM ; i++)
+    if(s->live)
     {
-        if(!blast[i].live)
-        {
-        blast[i].sx = s->sx;
-        blast[i].sy = s->sy;
-        blast[i].live = true;
-        break;
+        if(s->time % FPS == 0){
+            for(int i = 0; i < BLAST_NUM ; i++)
+            {
+                if(!blast[i].live)
+                {
+                    blast[i].sx = s->sx;
+                    blast[i].sy = s->sy;
+                    blast[i].live = true;
+                    break;
+                }
+            }
         }
-    }
     }
 }
 

@@ -3,6 +3,7 @@
 #include "spaceship.h"
 #include "blast.h"
 #include "enemy.h"
+#include "boss.h"
 #include "gif/algif.h"
 
 
@@ -109,6 +110,76 @@ void hit_enemy2(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
     }
 }
 
+void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s)
+{
+    if(b->live)
+    {
+        for(int i = 0; i < BLAST_NUM; i++)
+        {
+            if(blast[i].live)
+            {
+                if(sqrt((pow(b->sx - blast[i].sx,2) + pow(b->sy - blast[i].sy,2))) < b->bitmap_h/2 + blast[i].bitmap_h/2)
+                {
+                    if(b->life == 0)
+                    {
+                        b->live = false;
+                        boom1(b);
+
+                    } else {
+                        b->life --;
+                        boom(b);
+                    }
+
+                    blast[i].live = false;
+                    s->score +=100;
+                }
+            }
+        }
+
+        for(int i = 0; i < BLAST_NUM; i++)
+        {
+            if(blast2[i].live)
+            {
+                if(sqrt((pow(b->sx - blast2[i].sx,2) + pow(b->sy - blast2[i].sy,2))) < b->bitmap_h/2 + blast2[i].bitmap_h/2)
+                {
+                    if(i%2 == 0) {
+                        blast2[i].live = false;
+                        blast2[i+1].live = false;
+                    } else if(i%2 == 1){
+                        blast2[i].live = false;
+                        blast2[i-1].live = false;
+                    }
+                    if(b->life == 0)
+                    {
+                        b->live = false;
+                        boom1(b);
+
+
+                    } else {
+                        b->life --;
+                        boom(b);
+                    }
+                    s->score +=100;
+                }
+            }
+        }
+    }
+}
+
+void hit_spaceship(Blast blast[],Spaceship *s)
+{
+    for(int i = 0; i < BLAST_NUM; i++)
+    {
+        if(blast[i].live)
+        {
+            if(sqrt((pow(s->sx - blast[i].sx,2) + pow(s->sy - blast[i].sy,2))) < s->bitmap_h/2 + blast[i].bitmap_h/2)
+            {
+                s->gone -- ;
+                blast[i].live = false;
+            }
+        }
+    }
+}
 
 void boom(Enemy *e)
 {

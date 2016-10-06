@@ -138,10 +138,7 @@ int run(int level)
                 move_boss(b,s,runtime);
 
 
-                // 碰撞检测系统
 
-
-                spaceship_hit_weapen(s,weapen,&weapen_class);
 
 
                 redraw = true;
@@ -160,8 +157,12 @@ int run(int level)
                     draw_blast(enemy_blast);
                     draw_boss(b,runtime);
 
+                    // 碰撞检测系统
+                    spaceship_hit_weapen(s,weapen,&weapen_class);
                     hit_enemy(blast,enemy,enemy2,s);
                     hit_enemy2(blast2,enemy,enemy2,s);
+                    hit_boss(blast,blast2,b,s);
+                    hit_spaceship(enemy_blast,s);
 
                     al_flip_display();
                     redraw = false;

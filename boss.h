@@ -12,7 +12,8 @@ typedef struct{
     float sx;
     float sy;
     float speed;
-    int gone;
+    bool live;
+    int life;
     int time;
     ALLEGRO_COLOR color;
     ALLEGRO_BITMAP *bitmap;

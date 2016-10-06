@@ -25,7 +25,7 @@ void init_enenmy_blast(Blast blast[])
         blast[i].sx = 0;
         blast[i].sy = 0;
         blast[i].live = false;
-            blast[i].speed = 9;
+            blast[i].speed = 12;
             blast[i].bitmap = al_load_bitmap("../nonespace/img/laser.png");
             blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
             blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);

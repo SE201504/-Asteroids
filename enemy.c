@@ -16,6 +16,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sy = -300;
                 a[i].speed = 1.5;
                 a[i].life = 0;
+                a[i].time = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -29,6 +30,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sy = -300;
                 a[i].speed = 2.5;
                 a[i].life = 0;
+                a[i].time = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -45,6 +47,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sy = -300;
                 a[i].speed = 2.5;
                 a[i].life = 0;
+                a[i].time = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -57,6 +60,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sy = -300;
                 a[i].speed = 3.5;
                 a[i].life = 0;
+                a[i].time = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -181,10 +185,16 @@ void move_enemy(Enemy a[],Spaceship *s,int type)
             }
         }
     }
-
 }
 
-
+void time_plus(Enemy a[],Enemy b[])
+{
+    for(int i = 0; i < ENEMY_NUMBER;i ++)
+    {
+        a[i].time++;
+        b[i].time++;
+    }
+}
 
 
 

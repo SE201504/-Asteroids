@@ -70,7 +70,6 @@ void move_boss(Boss *b,Spaceship *s,int runtime)
     }
 }
 
-
 void fire_boss_blast(Blast blast[],Boss *s)
 {
     if(s->live)
@@ -89,6 +88,7 @@ void fire_boss_blast(Blast blast[],Boss *s)
         }
     }
 }
+
 
 //void al_destory_enemy(Enemy *e){
 //    free(e);

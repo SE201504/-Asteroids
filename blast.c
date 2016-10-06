@@ -1,6 +1,8 @@
 #include "main.h"
 #include "blast.h"
 #include "spaceship.h"
+#include "boss.h"
+#include "enemy.h"
 
 void init_blast(Blast blast[])
 {
@@ -79,6 +81,47 @@ void fire_blast(Blast blast[], Blast blast2[], Spaceship *s,int weapen)
                 blast2[i+1].live = true;
                 break;
             }
+        }
+    }
+}
+
+void fire_enemy_blast(Blast blast[],Enemy a[],Enemy b[])
+{
+    for(int i = 0; i < ENEMY_NUMBER;i++)
+    {
+        if(a[i].live)
+        {
+            if(a[i].time % FPS == 2)
+            {
+                for(int j = 0; j < BLAST_NUM ; j++)
+                {
+                    if(!blast[j].live)
+                    {
+                        blast[j].sx = a[i].sx;
+                        blast[j].sy = a[i].sy;
+                        blast[j].live = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if(b[i].live)
+        {
+            if(b[i].time % FPS == 1)
+            {
+                for(int j = 0; j < BLAST_NUM ; j++)
+                {
+                    if(!blast[j].live)
+                    {
+                        blast[j].sx = b[i].sx;
+                        blast[j].sy = b[i].sy;
+                        blast[j].live = true;
+                        break;
+                    }
+                }
+            }
+            break;
         }
     }
 }

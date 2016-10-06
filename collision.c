@@ -123,11 +123,11 @@ void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s)
                     if(b->life == 0)
                     {
                         b->live = false;
-                        boom1(b);
+                        boss_boom(b);
 
                     } else {
                         b->life --;
-                        boom(b);
+                        boss_boom(b);
                     }
 
                     blast[i].live = false;
@@ -152,12 +152,12 @@ void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s)
                     if(b->life == 0)
                     {
                         b->live = false;
-                        boom1(b);
+                        boss_boom(b);
 
 
                     } else {
                         b->life --;
-                        boom(b);
+                        boss_boom(b);
                     }
                     s->score +=100;
                 }
@@ -175,6 +175,7 @@ void hit_spaceship(Blast blast[],Spaceship *s)
             if(sqrt((pow(s->sx - blast[i].sx,2) + pow(s->sy - blast[i].sy,2))) < s->bitmap_h/2 + blast[i].bitmap_h/2)
             {
                 s->gone -- ;
+                spaceship_boom(s);
                 blast[i].live = false;
             }
         }
@@ -191,6 +192,8 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
             {
                 s->gone -- ;
                 a[i].live = false;
+                spaceship_boom(s);
+
             }
         }
         if(b[i].live)
@@ -199,6 +202,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
             {
                 s->gone -- ;
                 b[i].live = false;
+                spaceship_boom(s);
             }
         }
         if(boss->live)
@@ -207,6 +211,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
             {
                 s->gone -- ;
                 boss->live = false;
+                spaceship_boom(s);
             }
         }
     }
@@ -236,4 +241,30 @@ void boom1(Enemy *e)
     al_use_transform(&transform);
 
     al_draw_bitmap(algif_get_bitmap(boom,al_get_time()),-75,-75,2);
+}
+
+void boss_boom(Boss *e)
+{
+    ALGIF_ANIMATION *boom = NULL;
+    boom = algif_load_animation("../nonespace/gif/boom1.gif");
+
+    ALLEGRO_TRANSFORM transform;
+    al_identity_transform(&transform);
+    al_translate_transform(&transform, e->sx, e->sy);
+    al_use_transform(&transform);
+
+    al_draw_bitmap(algif_get_bitmap(boom,3),-75,-75,2);
+}
+
+void spaceship_boom(Spaceship *e)
+{
+    ALGIF_ANIMATION *boom = NULL;
+    boom = algif_load_animation("../nonespace/gif/boom.gif");
+
+    ALLEGRO_TRANSFORM transform;
+    al_identity_transform(&transform);
+    al_translate_transform(&transform, e->sx, e->sy);
+    al_use_transform(&transform);
+
+    al_draw_bitmap(algif_get_bitmap(boom,al_get_time()),-30,-30,2);
 }

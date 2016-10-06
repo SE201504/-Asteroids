@@ -2,8 +2,8 @@
 #define BOSS_H
 
 #include "main.h"
-#include "blast.h"
 #include "spaceship.h"
+#include "blast.h"
 
 
 #define BOSS_TIME 20
@@ -26,6 +26,5 @@ void draw_boss(Boss *s, int runtime);
 void move_boss(Boss *b, Spaceship *s, int runtime);
 void boss_hit_spaceship(Spaceship *s,Blast blast[]);
 void fire_boss_blast(Blast blast[],Boss *s);
-
 
 #endif // BOSS_H

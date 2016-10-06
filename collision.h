@@ -17,5 +17,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss);
 
 void boom(Enemy *e);
 void boom1(Enemy *e);
+void boss_boom(Boss *e);
+void spaceship_boom(Spaceship *e);
 
 #endif // COLLISION_H

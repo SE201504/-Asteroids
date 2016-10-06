@@ -140,3 +140,4 @@ void check(Blast blast[])
     }
 
 }
+

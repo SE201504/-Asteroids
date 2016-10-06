@@ -4,6 +4,7 @@
 #include "weapen.h"
 #include "enemy.h"
 #include "boss.h"
+#include "collision.h"
 
 
 
@@ -120,8 +121,8 @@ int run(int level)
                 runtime++;
 
                 re_init_weapen(weapen,runtime);
-                init_new_enemy(enemy,runtime);
-                init_new_enemy(enemy2,runtime);
+                init_new_enemy(enemy,runtime,level,1);
+                init_new_enemy(enemy2,runtime,level,2);
 
 
                 move_blast(blast);
@@ -135,8 +136,7 @@ int run(int level)
 
 
                 spaceship_hit_weapen(s,weapen,&weapen_class);
-                hit_enemy(blast,enemy,enemy2,s);
-                hit_enemy2(blast2,enemy,enemy2,s);
+
 
                 redraw = true;
                 if(redraw && al_is_event_queue_empty(event_queue))
@@ -152,6 +152,9 @@ int run(int level)
                     draw_blast(blast);
                     draw_blast2(blast2);
                     draw_boss(b,runtime);
+
+                    hit_enemy(blast,enemy,enemy2,s);
+                    hit_enemy2(blast2,enemy,enemy2,s);
 
                     al_flip_display();
                     redraw = false;

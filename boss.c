@@ -51,7 +51,7 @@ void move_boss(Boss *b,Spaceship *s,int runtime)
                 b->sx -= b->speed/2;
             }
 
-            if(b->sy > SCREEN_H/3){
+            if(b->sy > SCREEN_H/4){
 
             }else {
                 b->sy += b->speed;

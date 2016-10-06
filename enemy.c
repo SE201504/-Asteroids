@@ -15,6 +15,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
                 a[i].speed = 1.5;
+                a[i].life = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -27,6 +28,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
                 a[i].speed = 2.5;
+                a[i].life = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -42,6 +44,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
                 a[i].speed = 2.5;
+                a[i].life = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -53,6 +56,7 @@ void init_enemy(Enemy a[],int level,int type)
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
                 a[i].speed = 3.5;
+                a[i].life = 0;
                 a[i].live = false;
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
@@ -63,18 +67,52 @@ void init_enemy(Enemy a[],int level,int type)
 }
 
 
-void init_new_enemy(Enemy a[],int runtime)
+void init_new_enemy(Enemy a[],int runtime,int level,int type)
 {
-    for(int i = 0; i < ENEMY_NUMBER; i++)
+    if(type == 1)
+    {
+        for(int i = 0; i < ENEMY_NUMBER; i++)
     {
         if(runtime%FPS == 3)
         {
-            if(!a[i].live)
+            if(a[i].life == 0)
             {
-                a[i].live = true;
+
+                if(level == 1)
+                {
+                    a[i].life = ENEMY_LIFE_1_1;
+                } else if(level == 2) {
+                    a[i].life = ENEMY_LIFE_1_2;
+                }
+
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
+                a[i].live = true;
                 break;
+            }
+        }
+    }
+    } else if(type == 2)
+    {
+        for(int i = 0; i < ENEMY_NUMBER; i++)
+        {
+            if(runtime%FPS == 3)
+            {
+                if(a[i].life == 0)
+                {
+
+                    if(level == 1)
+                    {
+                        a[i].life = ENEMY_LIFE_2_1;
+                    } else if(level == 2) {
+                        a[i].life = ENEMY_LIFE_2_2;
+                    }
+                    a[i].sx = rand()%SCREEN_W+50;
+                    a[i].sy = -300;
+
+                    a[i].live = true;
+                    break;
+                }
             }
         }
     }
@@ -237,84 +275,7 @@ void move_enemy(Enemy a[],Spaceship *s,int type)
 
 }
 
-void hit_enemy(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
-{
-    for(int i = 0; i < BLAST_NUM; i++)
-    {
-        if(blast[i].live)
-        {
-            for(int j = 0; j < ENEMY_NUMBER; j++)
-            {
-                if(a[j].live)
-                {
-                    if(sqrt((pow(a[j].sx - blast[i].sx,2) + pow(a[j].sy - blast[i].sy,2))) < a[j].bitmap_w/2 + blast[i].bitmap_w/2)
-                    {
-                        a[j].live = false;
-                        blast[i].live = false;
-                        s->score +=100;
-                    }
-                }
 
-
-                if(b[j].live)
-                {
-                    if(sqrt((pow(b[j].sx - blast[i].sx,2) + pow(b[j].sy - blast[i].sy,2))) < b[j].bitmap_w/2 + blast[i].bitmap_w/2)
-                    {
-                        b[j].live = false;
-                        blast[i].live = false;
-                        s->score +=100;
-                    }
-                }
-            }
-        }
-    }
-}
-
-void hit_enemy2(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
-{
-    for(int i = 0; i < BLAST_NUM; i++)
-    {
-        if(blast[i].live)
-        {
-            for(int j = 0; j < ENEMY_NUMBER; j++)
-            {
-                if(a[j].live)
-                {
-                    if(sqrt((pow(a[j].sx - blast[i].sx,2) + pow(a[j].sy - blast[i].sy,2))) < a[j].bitmap_w/2 + blast[j].bitmap_w/2)
-                    {
-                        if(i%2 == 0) {
-                            blast[i].live = false;
-                            blast[i+1].live = false;
-                        } else if(i%2 == 1){
-                            blast[i].live = false;
-                            blast[i-1].live = false;
-                        }
-                        a[j].live = false;
-
-                        s->score +=100;
-                    }
-                }
-
-
-                if(b[j].live)
-                {
-                    if(sqrt((pow(b[j].sx - blast[i].sx,2) + pow(b[j].sy - blast[i].sy,2))) < b[j].bitmap_w/2 + blast[i].bitmap_w/2)
-                    {
-                        if(i%2 == 0) {
-                            blast[i].live = false;
-                            blast[i+1].live = false;
-                        } else if(i%2 == 1){
-                            blast[i].live = false;
-                            blast[i-1].live = false;
-                        }
-                        b[j].live = false;
-                        s->score +=100;
-                    }
-                }
-            }
-        }
-    }
-}
 
 
 

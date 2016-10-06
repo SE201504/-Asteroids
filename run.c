@@ -163,6 +163,7 @@ int run(int level)
                     hit_enemy2(blast2,enemy,enemy2,s);
                     hit_boss(blast,blast2,b,s);
                     hit_spaceship(enemy_blast,s);
+                    crash_spaceship(s,enemy,enemy2,b);
 
                     al_flip_display();
                     redraw = false;

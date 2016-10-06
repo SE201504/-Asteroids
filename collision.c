@@ -181,6 +181,37 @@ void hit_spaceship(Blast blast[],Spaceship *s)
     }
 }
 
+void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
+{
+    for(int i = 0; i < ENEMY_NUMBER; i++)
+    {
+        if(a[i].live)
+        {
+            if(sqrt((pow(s->sx - a[i].sx,2) + pow(s->sy - a[i].sy,2))) < s->bitmap_h/2 + a[i].bitmap_h/2)
+            {
+                s->gone -- ;
+                a[i].live = false;
+            }
+        }
+        if(b[i].live)
+        {
+            if(sqrt((pow(s->sx - b[i].sx,2) + pow(s->sy - b[i].sy,2))) < s->bitmap_h/2 + b[i].bitmap_h/2)
+            {
+                s->gone -- ;
+                b[i].live = false;
+            }
+        }
+        if(boss->live)
+        {
+            if(sqrt((pow(s->sx - boss->sx,2) + pow(s->sy - boss->sy,2))) < s->bitmap_h/2 + boss->bitmap_h/2)
+            {
+                s->gone -- ;
+                boss->live = false;
+            }
+        }
+    }
+}
+
 void boom(Enemy *e)
 {
     ALGIF_ANIMATION *boom = NULL;

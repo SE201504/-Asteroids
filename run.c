@@ -6,8 +6,9 @@
 #include "boss.h"
 #include "collision.h"
 #include "unionship.h"
+#include "restart.h"
 
-
+bool doexit = false;
 
 int run(int level)
 {
@@ -190,6 +191,9 @@ int run(int level)
     al_destroy_event_queue(event_queue);
     al_destroy_font(font24);
     al_destroy_font(font56);
+
+    while(!doexit)
+        restart();
     return 0;
 }
 

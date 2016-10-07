@@ -20,7 +20,8 @@ SOURCES += \
     enemy.c \
     boss.c \
     collision.c \
-    unionship.c
+    unionship.c \
+    restart.c
 
 HEADERS += \
     main.h \
@@ -35,7 +36,8 @@ HEADERS += \
     enemy.h \
     boss.h \
     collision.h \
-    unionship.h
+    unionship.h \
+    restart.h
 
 DISTFILES +=
 

@@ -1,14 +1,8 @@
-/*
- * main.c
- * 选择界面.
- *
- */
-
-#include "main.h"
-#include "start.h"
+#include "math.h"
+#include "restart.h"
 #include "select.h"
 
-int start(void)
+int restart(void)
 {
 
 
@@ -142,13 +136,13 @@ int start(void)
             switch (count%2) {
             case 0:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Start>");
+                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Restart>");
                 al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
                 break;
             case 1:
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Start>");
+                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Restart>");
 
                 break;
             }

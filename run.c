@@ -34,6 +34,7 @@ int run(int level)
     Blast blast[BLAST_NUM];
     Blast blast2[BLAST_NUM];
     Blast enemy_blast[BLAST_NUM];
+    Blast boss_blast[BLAST_NUM];
     Enemy enemy[ENEMY_NUMBER];
     Enemy enemy2[ENEMY_NUMBER];
     Unionship unionship[2];
@@ -67,8 +68,8 @@ int run(int level)
     al_hide_mouse_cursor(display);
 
     backimage = al_load_bitmap("../nonespace/img/backimage.jpg");
-    font24 = al_load_font("../Spaceship/img/fontl.ttf",24,0);
-    font56 = al_load_font("../Spaceship/img/fontl.ttf",56,0);
+    font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
+    font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
     event_queue = al_create_event_queue();//创建事件队列
@@ -85,6 +86,7 @@ int run(int level)
     init_blast(blast);
     init_blast2(blast2);
     init_enenmy_blast(enemy_blast);
+    init_boss_blast(boss_blast);
     init_weapen(weapen);
     init_enemy(enemy,level,1);
     init_enemy(enemy2,level,2);
@@ -133,13 +135,14 @@ int run(int level)
                 re_init_weapen(weapen,weapen_class);
                 init_new_enemy(enemy,runtime,level,1);
                 init_new_enemy(enemy2,runtime,level,2);
-                fire_boss_blast(enemy_blast,b);
+                fire_boss_blast(boss_blast,b);
                 fire_enemy_blast(enemy_blast,enemy,enemy2);
                 fire_union_blast(blast,unionship,weapen_class,runtime);
 
 
                 move_unionship(unionship,s);
                 move_blast(blast);
+                move_boss_blast(boss_blast);
                 move_enemy_blast(enemy_blast);
                 move_blast(blast2);
                 move_enemy(enemy,s,1);
@@ -164,6 +167,7 @@ int run(int level)
                     draw_unionship(unionship,weapen_class);
                     draw_weapen(weapen);
                     draw_blast(blast);
+                    draw_blast(boss_blast);
                     draw_blast2(blast2);
                     draw_blast(enemy_blast);
                     draw_boss(b,s,runtime);

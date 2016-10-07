@@ -13,6 +13,7 @@ void init_blast(Blast blast[])
         blast[i].sy = 0;
         blast[i].live = false;
             blast[i].speed = 9;
+            blast[i].heading = 0;
             blast[i].bitmap = al_load_bitmap("../nonespace/img/blast.png");
             blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
             blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
@@ -28,7 +29,24 @@ void init_enenmy_blast(Blast blast[])
         blast[i].sy = 0;
         blast[i].live = false;
             blast[i].speed = 12;
+            blast[i].heading = 0;
             blast[i].bitmap = al_load_bitmap("../nonespace/img/laser.png");
+            blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
+            blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
+    }
+}
+
+void init_boss_blast(Blast blast[])
+{
+
+    for(int i = 0; i < BLAST_NUM ; i++){
+
+        blast[i].sx = 0;
+        blast[i].sy = 0;
+        blast[i].live = false;
+            blast[i].speed = 3;
+            blast[i].heading = 0;
+            blast[i].bitmap = al_load_bitmap("../nonespace/img/boss_blast.png");
             blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
             blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
     }
@@ -41,6 +59,7 @@ void init_blast2(Blast blast[])
         blast[i].sy = 0;
         blast[i].live = false;
             blast[i].speed = 9;
+            blast[i].heading = 0;
             blast[i].bitmap = al_load_bitmap("../nonespace/img/blast2.png");
             blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
             blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
@@ -185,6 +204,19 @@ void move_enemy_blast(Blast blast[])
         if(blast[i].live)
         {
             blast[i].sy += blast[i].speed ;
+            check(blast);
+        }
+    }
+}
+
+void move_boss_blast(Blast blast[])
+{
+    for(int i = 0; i < BLAST_NUM; i++)
+    {
+        if(blast[i].live)
+        {
+            blast[i].sy += blast[i].speed * cos(blast[i].heading);
+            blast[i].sx -= blast[i].speed * sin(blast[i].heading);
             check(blast);
         }
     }

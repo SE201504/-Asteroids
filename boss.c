@@ -85,17 +85,17 @@ void fire_boss_blast(Blast blast[],Boss *s)
 {
     if(s->live)
     {
-        if(s->time % FPS == 0){
+        if(s->time == 60 * 7){
             for(int i = 0; i < BLAST_NUM ; i++)
             {
-                if(!blast[i].live)
-                {
                     blast[i].sx = s->sx;
                     blast[i].sy = s->sy;
+                    blast[i].heading = i*2;
                     blast[i].live = true;
-                    break;
-                }
+
             }
+            s->time = 0;
+
         }
     }
 }

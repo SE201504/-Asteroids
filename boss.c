@@ -101,6 +101,4 @@ void fire_boss_blast(Blast blast[],Boss *s)
 }
 
 
-//void al_destory_enemy(Enemy *e){
-//    free(e);
-//}
+

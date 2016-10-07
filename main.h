@@ -13,7 +13,7 @@
 
 
 #define SCREEN_W 1024
-#define SCREEN_H 768
+#define SCREEN_H 611
 #define FPS 60
 
 

@@ -51,10 +51,9 @@ int start(void)
     }
 
 
-    font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
-    font32 = al_load_font("../nonespace/img/fontl.ttf",32,0);
-    font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
-    setbackimage = al_load_bitmap("../nonespace/img/start.jpg");
+    font32 = al_load_font("../nonespace/img/kaiti.ttf",32,0);
+    font56 = al_load_font("../nonespace/img/betsy.ttf",100,0);
+    setbackimage = al_load_bitmap("../nonespace/img/start2.jpg");
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
     event_queue = al_create_event_queue();//创建事件队列
@@ -142,13 +141,16 @@ int start(void)
             switch (count%2) {
             case 0:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Start>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
+                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
+                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
                 break;
             case 1:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Start>");
+                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
+                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
+
 
                 break;
             }
@@ -169,7 +171,10 @@ int start(void)
 
             else if(ifselect && al_is_event_queue_empty(event_queue ))
             {
-                al_draw_text(font56,al_map_rgb(0,0,0),SCREEN_W/2,SCREEN_H/6,ALLEGRO_ALIGN_CENTER,"<Asteroids>");
+                al_draw_text(font56,al_map_rgb(100,0,100),(SCREEN_W*2)/5,SCREEN_H/9,ALLEGRO_ALIGN_CENTER,"EXPLOSD");
+                 al_draw_text(font56,al_map_rgb(225,50,0),(SCREEN_W*3)/5,(SCREEN_H*9)/40,ALLEGRO_ALIGN_CENTER,"INVADER");
+
+
 
                 al_flip_display();
             }

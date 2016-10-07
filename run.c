@@ -203,7 +203,7 @@ int run(int level)
     al_destroy_font(font56);
 
     while(!doexit)
-        restart();
+        restart(s->score);
     return 0;
 }
 

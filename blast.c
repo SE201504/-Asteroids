@@ -20,9 +20,11 @@ void init_blast(Blast blast[])
     }
 }
 
-void init_enenmy_blast(Blast blast[])
+void init_enenmy_blast(Blast blast[],int type)
 {
 
+    if(type == 1)
+    {
     for(int i = 0; i < BLAST_NUM ; i++){
 
         blast[i].sx = 0;
@@ -33,6 +35,19 @@ void init_enenmy_blast(Blast blast[])
             blast[i].bitmap = al_load_bitmap("../nonespace/img/laser.png");
             blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
             blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
+    }
+    }else {
+        for(int i = 0; i < BLAST_NUM ; i++){
+
+            blast[i].sx = 0;
+            blast[i].sy = 0;
+            blast[i].live = false;
+                blast[i].speed = 12;
+                blast[i].heading = 0;
+                blast[i].bitmap = al_load_bitmap("../nonespace/img/blast1.png");
+                blast[i].bitmap_w = al_get_bitmap_width(blast[i].bitmap);
+                blast[i].bitmap_h = al_get_bitmap_height(blast[i].bitmap);
+        }
     }
 }
 
@@ -104,7 +119,7 @@ void fire_blast(Blast blast[], Blast blast2[], Spaceship *s,int weapen)
     }
 }
 
-void fire_enemy_blast(Blast blast[],Enemy a[],Enemy b[])
+void fire_enemy_blast(Blast blast[],Blast blast2[],Enemy a[],Enemy b[])
 {
     for(int i = 0; i < ENEMY_NUMBER;i++)
     {
@@ -131,11 +146,11 @@ void fire_enemy_blast(Blast blast[],Enemy a[],Enemy b[])
             {
                 for(int j = 0; j < BLAST_NUM ; j++)
                 {
-                    if(!blast[j].live)
+                    if(!blast2[j].live)
                     {
-                        blast[j].sx = b[i].sx;
-                        blast[j].sy = b[i].sy;
-                        blast[j].live = true;
+                        blast2[j].sx = b[i].sx;
+                        blast2[j].sy = b[i].sy;
+                        blast2[j].live = true;
                         break;
                     }
                 }

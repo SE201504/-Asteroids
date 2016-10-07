@@ -6,7 +6,7 @@
 #include "blast.h"
 
 
-#define BOSS_TIME 5
+#define BOSS_TIME 20
 
 typedef struct{
     float sx;

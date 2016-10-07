@@ -35,6 +35,7 @@ int run(int level)
     Blast blast2[BLAST_NUM];
     Blast enemy_blast[BLAST_NUM];
     Blast boss_blast[BLAST_NUM];
+    Blast enemy_blast2[BLAST_NUM];
     Enemy enemy[ENEMY_NUMBER];
     Enemy enemy2[ENEMY_NUMBER];
     Unionship unionship[2];
@@ -85,7 +86,8 @@ int run(int level)
     init_spaceship(s,level);
     init_blast(blast);
     init_blast2(blast2);
-    init_enenmy_blast(enemy_blast);
+    init_enenmy_blast(enemy_blast,1);
+    init_enenmy_blast(enemy_blast2,2);
     init_boss_blast(boss_blast);
     init_weapen(weapen);
     init_enemy(enemy,level,1);
@@ -136,7 +138,7 @@ int run(int level)
                 init_new_enemy(enemy,runtime,level,1);
                 init_new_enemy(enemy2,runtime,level,2);
                 fire_boss_blast(boss_blast,b);
-                fire_enemy_blast(enemy_blast,enemy,enemy2);
+                fire_enemy_blast(enemy_blast,enemy_blast2,enemy,enemy2);
                 fire_union_blast(blast,unionship,weapen_class,runtime);
 
 
@@ -144,6 +146,7 @@ int run(int level)
                 move_blast(blast);
                 move_boss_blast(boss_blast);
                 move_enemy_blast(enemy_blast);
+                move_enemy_blast(enemy_blast2);
                 move_blast(blast2);
                 move_enemy(enemy,s,1);
                 move_enemy(enemy2,s,2);
@@ -170,6 +173,7 @@ int run(int level)
                     draw_blast(boss_blast);
                     draw_blast2(blast2);
                     draw_blast(enemy_blast);
+                    draw_blast(enemy_blast2);
                     draw_boss(b,s,runtime);
 
                     // 碰撞检测系统
@@ -181,6 +185,8 @@ int run(int level)
                     hit_enemy2(blast2,enemy,enemy2,s);
                     hit_boss(blast,blast2,b,s);
                     hit_spaceship(enemy_blast,s);
+                    hit_spaceship(enemy_blast2,s);
+                    hit_spaceship(boss_blast,s);
                     crash_spaceship(s,enemy,enemy2,b);
                     }
 

@@ -45,7 +45,7 @@ void hit_enemy(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
                             boom(&b[j]);
                         }
                         blast[i].live = false;
-                        s->score +=100;
+                        s->score +=200;
                     }
                 }
             }
@@ -102,7 +102,7 @@ void hit_enemy2(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
                             b[j].life --;
                             boom(&b[j]);
                         }
-                        s->score +=100;
+                        s->score +=200;
                     }
                 }
             }
@@ -131,7 +131,7 @@ void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s)
                     }
 
                     blast[i].live = false;
-                    s->score +=100;
+                    s->score +=1000;
                 }
             }
         }
@@ -174,7 +174,7 @@ void hit_spaceship(Blast blast[],Spaceship *s)
         {
             if(sqrt((pow(s->sx - blast[i].sx,2) + pow(s->sy - blast[i].sy,2))) < s->bitmap_h/2 + blast[i].bitmap_h/2)
             {
-                s->gone -- ;
+                s->life -=10 ;
                 spaceship_boom(s);
                 blast[i].live = false;
             }
@@ -190,17 +190,16 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
         {
             if(sqrt((pow(s->sx - a[i].sx,2) + pow(s->sy - a[i].sy,2))) < s->bitmap_h/2 + a[i].bitmap_h/2)
             {
-                s->gone -- ;
+                s->life-=10 ;
                 a[i].live = false;
                 spaceship_boom(s);
-
             }
         }
         if(b[i].live)
         {
             if(sqrt((pow(s->sx - b[i].sx,2) + pow(s->sy - b[i].sy,2))) < s->bitmap_h/2 + b[i].bitmap_h/2)
             {
-                s->gone -- ;
+                s->life-=10 ;
                 b[i].live = false;
                 spaceship_boom(s);
             }
@@ -209,7 +208,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
         {
             if(sqrt((pow(s->sx - boss->sx,2) + pow(s->sy - boss->sy,2))) < s->bitmap_h/2 + boss->bitmap_h/2)
             {
-                s->gone -- ;
+                s->life -=10 ;
                 boss->live = false;
                 spaceship_boom(s);
             }
@@ -259,12 +258,11 @@ void boss_boom(Boss *e)
 void spaceship_boom(Spaceship *e)
 {
     ALGIF_ANIMATION *boom = NULL;
-    boom = algif_load_animation("../nonespace/gif/boom.gif");
+    boom = algif_load_animation("../nonespace/gif/boom1.gif");
 
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);
     al_translate_transform(&transform, e->sx, e->sy);
     al_use_transform(&transform);
-
-    al_draw_bitmap(algif_get_bitmap(boom,al_get_time()),-30,-30,2);
+    al_draw_bitmap(algif_get_bitmap(boom,al_get_time()),-75,-75,2);
 }

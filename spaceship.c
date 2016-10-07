@@ -13,6 +13,7 @@ void init_spaceship(Spaceship* s,int level)
     s->gone = 3;
     s->score = 0;
     s->time = 0;
+    s->life = 100;
     s->color = al_map_rgb(222,80,222);
     if(level == 1)
     {
@@ -34,7 +35,7 @@ void init_spaceship(Spaceship* s,int level)
     }
 }
 
-void draw_spaceship(Spaceship *s)
+void draw_spaceship(Spaceship *s,int* weapen_class)
 {
     ALLEGRO_BITMAP *protect = NULL;
     protect = al_load_bitmap("../nonespace/img/trans.png");
@@ -45,6 +46,8 @@ void draw_spaceship(Spaceship *s)
     al_use_transform(&transform);
 
 
+    if(s->life!=0)
+    {
         al_draw_bitmap(s->bitmap,- s->bitmap_w/2,- s->bitmap_h/2,0);
         if(s->time%3 == 0) {
         al_draw_bitmap(s->bitmap_s,- s->bitmap_s_w/2, 23,0);
@@ -54,11 +57,21 @@ void draw_spaceship(Spaceship *s)
         if(s->time % 10 == 0)
         al_draw_bitmap(protect,-al_get_bitmap_width(protect)/2,-al_get_bitmap_height(protect)/2,0);
     }
+    } else {
+        *weapen_class = 1;
+        s->gone--;
+        s->life = 100;
+        s->time =0;
+    }
 
 }
 
-void ship_live(Spaceship *s)
+void ship_live(Spaceship *s,ALLEGRO_FONT *font)
 {
+    char str[30];
+    al_draw_text(font,al_map_rgb(0,255,0),10,100,0,"LIFE:");
+    al_draw_text(font,al_map_rgb(0,255,0),130,100,0,itoa(s->life,str,10));
+
     if(s->gone == 1)
     {
     ALLEGRO_TRANSFORM transform;
@@ -77,7 +90,7 @@ void ship_live(Spaceship *s)
 
 
         al_identity_transform(&transform);
-        al_translate_transform(&transform, 70, 20);
+        al_translate_transform(&transform, 120, 20);
         al_use_transform(&transform);
 
         al_draw_bitmap(s->bitmap,0,0,0);
@@ -92,13 +105,13 @@ void ship_live(Spaceship *s)
         al_draw_bitmap(s->bitmap,0,0,0);
 
         al_identity_transform(&transform);
-        al_translate_transform(&transform, 70, 20);
+        al_translate_transform(&transform, 120, 20);
         al_use_transform(&transform);
 
         al_draw_bitmap(s->bitmap,0,0,0);
 
         al_identity_transform(&transform);
-        al_translate_transform(&transform, 120, 20);
+        al_translate_transform(&transform, 220, 20);
         al_use_transform(&transform);
 
         al_draw_bitmap(s->bitmap,0,0,0);
@@ -115,4 +128,49 @@ void spaceship_hit_weapen(Spaceship *s, Weapen *weapen,int* weapen_class)
         }
     }
 
+}
+
+void ship_score(Spaceship *s, ALLEGRO_FONT *score)
+{
+    ALLEGRO_TRANSFORM transform;
+    al_identity_transform(&transform);
+    al_rotate_transform(&transform,0);
+    al_translate_transform(&transform, 0, 0);
+    al_use_transform(&transform);
+
+    char str[30];
+    al_draw_text(score,al_map_rgb(0,255,0),800,30,0,"Score:");
+    al_draw_text(score,al_map_rgb(0,255,0),900,30,0,itoa(s->score,str,10));
+
+}
+
+char *itoa(int num,char *str,int radix)
+{/*索引表*/
+    char index[]="0123456789ABCDEF";
+    unsigned unum;/*中间变量*/
+    int i=0,j,k;
+    /*确定unum的值*/
+    if(radix==10&&num<0)/*十进制负数*/
+    {
+        unum=(unsigned)-num;
+        str[i++]='-';
+    }
+    else unum=(unsigned)num;/*其他情况*/
+    /*转换*/
+    do{
+        str[i++]=index[unum%(unsigned)radix];
+        unum/=radix;
+    }while(unum);
+    str[i]='\0';
+    /*逆序*/
+    if(str[0]=='-')k=1;/*十进制负数*/
+    else k=0;
+    char temp;
+    for(j=k;j<=(i-1)/2;j++)
+    {
+        temp=str[j];
+        str[j]=str[i-1+k-j];
+        str[i-1+k-j]=temp;
+    }
+    return str;
 }

@@ -133,7 +133,7 @@ int run(int level)
                 init_new_enemy(enemy2,runtime,level,2);
                 fire_boss_blast(enemy_blast,b);
                 fire_enemy_blast(enemy_blast,enemy,enemy2);
-                fire_union_blast(blast,s,weapen_class,runtime);
+                fire_union_blast(blast,unionship,weapen_class,runtime);
 
 
                 move_unionship(unionship,s);
@@ -154,11 +154,12 @@ int run(int level)
 
 
                     //各种对象绘制
-                    ship_live(s);
+                    ship_score(s,font24);
+                    ship_live(s,font24);
                     draw_enemy(enemy);
                     draw_enemy(enemy2);
-                    draw_spaceship(s);
-                    draw_unionship(unionship,s,weapen_class);
+                    draw_spaceship(s,&weapen_class);
+                    draw_unionship(unionship,weapen_class);
                     draw_weapen(weapen);
                     draw_blast(blast);
                     draw_blast2(blast2);
@@ -166,12 +167,16 @@ int run(int level)
                     draw_boss(b,runtime);
 
                     // 碰撞检测系统
+
                     spaceship_hit_weapen(s,weapen,&weapen_class);
+                    if(s->time > FPS * 3)
+                    {
                     hit_enemy(blast,enemy,enemy2,s);
                     hit_enemy2(blast2,enemy,enemy2,s);
                     hit_boss(blast,blast2,b,s);
                     hit_spaceship(enemy_blast,s);
                     crash_spaceship(s,enemy,enemy2,b);
+                    }
 
                     al_flip_display();
                     redraw = false;

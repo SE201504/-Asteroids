@@ -9,6 +9,7 @@ typedef struct{
     int score;
     int time;
     int gone;
+    int life;
     ALLEGRO_COLOR color;
     ALLEGRO_BITMAP *bitmap;
     ALLEGRO_BITMAP *bitmap_s;
@@ -19,8 +20,11 @@ typedef struct{
 } Spaceship;
 
 void init_spaceship(Spaceship* s, int level);
-void draw_spaceship(Spaceship *s);
-void ship_live(Spaceship *s);
+void draw_spaceship(Spaceship *s, int *weapen_class);
+void ship_live(Spaceship *s,ALLEGRO_FONT *font);
 void spaceship_hit_weapen(Spaceship *s , Weapen *weapen, int *weapen_class);
+void ship_score(Spaceship *s, ALLEGRO_FONT *score);
+
+char *itoa(int num,char *str,int radix);
 
 #endif // SPACESHIP_H

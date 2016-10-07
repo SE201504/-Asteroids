@@ -165,7 +165,7 @@ int run(int level)
                     draw_blast(blast);
                     draw_blast2(blast2);
                     draw_blast(enemy_blast);
-                    draw_boss(b,runtime);
+                    draw_boss(b,s,runtime);
 
                     // 碰撞检测系统
 

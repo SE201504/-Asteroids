@@ -6,7 +6,7 @@
 #include "blast.h"
 
 
-#define BOSS_TIME 20
+#define BOSS_TIME 5
 
 typedef struct{
     float sx;
@@ -22,7 +22,7 @@ typedef struct{
 } Boss;
 
 void init_boss(Boss *s,int level);
-void draw_boss(Boss *s, int runtime);
+void draw_boss(Boss *s, Spaceship *a, int runtime);
 void move_boss(Boss *b, Spaceship *s, int runtime);
 void boss_hit_spaceship(Spaceship *s,Blast blast[]);
 void fire_boss_blast(Blast blast[],Boss *s);

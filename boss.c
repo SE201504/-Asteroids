@@ -9,7 +9,7 @@ void init_boss(Boss *s,int level)
     s->sx = 100;
     s->sy = -200;
     s->speed = 3;
-    s->life = 5;
+    s->life = 100;
     s->live = false;
     s->time=0;
     s->color = al_map_rgb(222,80,222);
@@ -24,11 +24,18 @@ void init_boss(Boss *s,int level)
 }
 
 
-void draw_boss(Boss *s, int runtime)
+void draw_boss(Boss *s,Spaceship *a, int runtime)
 {   
     if(runtime > FPS * BOSS_TIME)
     {
         s->live = true;
+        ALLEGRO_TRANSFORM transform1;
+        al_identity_transform(&transform1);
+        al_translate_transform(&transform1, 270, -150);
+        al_use_transform(&transform1);
+
+        al_draw_filled_rounded_rectangle(20,190,500,210,10,10,al_map_rgb(200,200,200));
+        al_draw_filled_rounded_rectangle(20,190,s->life * 5,210,10,10,al_map_rgb(200,0,0));
         }
 
     if(s->live){
@@ -37,6 +44,10 @@ void draw_boss(Boss *s, int runtime)
         al_translate_transform(&transform, s->sx, s->sy);
         al_use_transform(&transform);
         al_draw_bitmap(s->bitmap,- s->bitmap_w/2,- s->bitmap_h/2,0);
+
+    }
+    if(s->life <= 0){
+        a->gone = 0;
     }
 
 

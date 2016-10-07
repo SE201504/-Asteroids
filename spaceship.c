@@ -72,6 +72,9 @@ void ship_live(Spaceship *s,ALLEGRO_FONT *font)
     al_draw_text(font,al_map_rgb(0,255,0),10,100,0,"LIFE:");
     al_draw_text(font,al_map_rgb(0,255,0),130,100,0,itoa(s->life,str,10));
 
+    al_draw_filled_rounded_rectangle(10,150,300,170,10,10,al_map_rgb(200,200,200));
+    al_draw_filled_rounded_rectangle(10,150,s->life * 3,170,10,10,al_map_rgb(95,191,0));
+
     if(s->gone == 1)
     {
     ALLEGRO_TRANSFORM transform;
@@ -90,7 +93,7 @@ void ship_live(Spaceship *s,ALLEGRO_FONT *font)
 
 
         al_identity_transform(&transform);
-        al_translate_transform(&transform, 120, 20);
+        al_translate_transform(&transform, 100, 20);
         al_use_transform(&transform);
 
         al_draw_bitmap(s->bitmap,0,0,0);
@@ -105,17 +108,19 @@ void ship_live(Spaceship *s,ALLEGRO_FONT *font)
         al_draw_bitmap(s->bitmap,0,0,0);
 
         al_identity_transform(&transform);
-        al_translate_transform(&transform, 120, 20);
+        al_translate_transform(&transform, 100, 20);
         al_use_transform(&transform);
 
         al_draw_bitmap(s->bitmap,0,0,0);
 
         al_identity_transform(&transform);
-        al_translate_transform(&transform, 220, 20);
+        al_translate_transform(&transform, 180, 20);
         al_use_transform(&transform);
 
         al_draw_bitmap(s->bitmap,0,0,0);
     }
+
+
 
 }
 

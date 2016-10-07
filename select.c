@@ -53,7 +53,7 @@ int selects(void)
     font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
     font32 = al_load_font("../nonespace/img/fontl.ttf",32,0);
     font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
-    setbackimage = al_load_bitmap("../nonespace/img/start.jpg");
+    setbackimage = al_load_bitmap("../nonespace/img/start2.jpg");
     gif = algif_load_animation("../nonespace/gif/boom1.gif");
 
     timer = al_create_timer(1.0 / FPS);//创建计时器

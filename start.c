@@ -17,7 +17,7 @@ int start(void)
     bool set_keys[3] = {false, false, false};
     bool click_mouse1 = false;
     bool click_mouse2 = false;
-
+    bool click_mouse3 = false;
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;//声明事件队列
     ALLEGRO_TIMER *timer = NULL;//声明计时器
@@ -71,7 +71,9 @@ int start(void)
     while(ifselect)
     {
         ALLEGRO_EVENT event;
-        int dz,dy;
+        int dx;
+        int dy;
+        int dz;
 
         al_wait_for_event(event_queue,&event);//把事件队列里的事件装入事件 event
         if(event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -81,7 +83,7 @@ int start(void)
             case ALLEGRO_KEY_UP:
                 set_keys[SET_UP] = true;
                 count --;
-                if (count == -1) count = 1;
+                if (count == -1) count = 2;
                 break;
             case ALLEGRO_KEY_DOWN:
                 set_keys[SET_DOWN] = true;
@@ -97,7 +99,7 @@ int start(void)
             switch(event.keyboard.keycode)
             {
             case ALLEGRO_KEY_UP:
-                set_keys[SET_UP] = true;
+                set_keys[SET_UP] = false;
                 break;
             case ALLEGRO_KEY_DOWN:
                 set_keys[SET_DOWN] = false;
@@ -117,53 +119,66 @@ int start(void)
             break;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_AXES || event.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY){
-            dy = event.mouse.y - SCREEN_H/3;
-            dz = event.mouse.y - SCREEN_H/2;
+            dx = event.mouse.y - (SCREEN_H*4)/9;
+            dy = event.mouse.y - (SCREEN_H*5)/9;
+            dz = event.mouse.y - (SCREEN_H*6)/9;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-            if(dy > -30 && dy <30){
+            if(dx > -30 && dx <30){
                 click_mouse1=true;
-            count = 0;
+                count = 0;
             }
 
-            if(dz > -30 && dz <30){
+            if(dy > -30 && dy <30){
                 click_mouse2=true;
                 count = 1;
+            }
+            if(dz > -30 && dz <30){
+                click_mouse3=true;
+                count = 2;
             }
 
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             click_mouse1 = false;
             click_mouse2 = false;
+            click_mouse3 = false;
         }
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
-            switch (count%2) {
-            case 0:
+            if (count % 3 == 0) {
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
                 al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
                 al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
-                break;
-            case 1:
+//                break;
+            }
+            else if (count % 3 == 1) {
+                al_draw_bitmap(setbackimage,0,0,0);
+                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
+                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
+            }
+            else if (count % 3 == 2) {
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
                 al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
                 al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
-
-
-                break;
             }
 
-
-            if((set_keys[ENTER] || click_mouse1) && (count%2 == 0))
+            if((set_keys[ENTER] && count%3 == 0) || click_mouse1 )
             {
                 ifselect = false;
 
                 al_destroy_display(display);
                 selects();
             }
-            else if((set_keys[ENTER] || click_mouse2) && (count%2 == 1))
+            else if((set_keys[ENTER] || click_mouse2) && (count%3 == 1))
+            {
+
+                al_destroy_display(display);
+            }
+            else if((set_keys[ENTER] || click_mouse3) && (count%3 == 2))
             {
 
                 al_destroy_display(display);

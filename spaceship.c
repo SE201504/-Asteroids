@@ -16,7 +16,7 @@ void init_spaceship(Spaceship* s,int level)
     s->color = al_map_rgb(222,80,222);
     if(level == 1)
     {
-    s->bitmap = al_load_bitmap("../nonespace/img/spaceship.png");
+    s->bitmap = al_load_bitmap("../nonespace/img/spaceship0.png");
     s->bitmap_s = al_load_bitmap("../nonespace/img/spaceship_moving.png");
     s->bitmap_w = al_get_bitmap_width(s->bitmap);
     s->bitmap_h = al_get_bitmap_height(s->bitmap);
@@ -36,6 +36,9 @@ void init_spaceship(Spaceship* s,int level)
 
 void draw_spaceship(Spaceship *s)
 {
+    ALLEGRO_BITMAP *protect = NULL;
+    protect = al_load_bitmap("../nonespace/img/trans.png");
+
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);
     al_translate_transform(&transform, s->sx, s->sy);
@@ -49,7 +52,7 @@ void draw_spaceship(Spaceship *s)
 
     if(s->time <= FPS * 3) {
         if(s->time % 10 == 0)
-        al_draw_circle(0,0,40,al_map_rgb(255,200,200),2);
+        al_draw_bitmap(protect,-al_get_bitmap_width(protect)/2,-al_get_bitmap_height(protect)/2,0);
     }
 
 }
@@ -105,8 +108,6 @@ void ship_live(Spaceship *s)
 
 void spaceship_hit_weapen(Spaceship *s, Weapen *weapen,int* weapen_class)
 {
-
-
     if(weapen->live) {
         if((pow((s->sx - weapen->sx),2) + pow((s->sy - weapen->sy),2))  < 200){
                 weapen->live = false;

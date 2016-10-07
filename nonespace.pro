@@ -19,7 +19,8 @@ SOURCES += \
     weapen.c \
     enemy.c \
     boss.c \
-    collision.c
+    collision.c \
+    unionship.c
 
 HEADERS += \
     main.h \
@@ -33,7 +34,8 @@ HEADERS += \
     weapen.h \
     enemy.h \
     boss.h \
-    collision.h
+    collision.h \
+    unionship.h
 
 DISTFILES +=
 

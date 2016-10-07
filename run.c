@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "boss.h"
 #include "collision.h"
+#include "unionship.h"
 
 
 
@@ -34,6 +35,7 @@ int run(int level)
     Blast enemy_blast[BLAST_NUM];
     Enemy enemy[ENEMY_NUMBER];
     Enemy enemy2[ENEMY_NUMBER];
+    Unionship unionship[2];
     Boss *b = (Boss*)malloc(sizeof(Boss));
 
 
@@ -86,6 +88,7 @@ int run(int level)
     init_enemy(enemy,level,1);
     init_enemy(enemy2,level,2);
     init_boss(b,level);
+    init_unionship(unionship);
 
 
 
@@ -130,8 +133,10 @@ int run(int level)
                 init_new_enemy(enemy2,runtime,level,2);
                 fire_boss_blast(enemy_blast,b);
                 fire_enemy_blast(enemy_blast,enemy,enemy2);
+                fire_union_blast(blast,s,weapen_class,runtime);
 
 
+                move_unionship(unionship,s);
                 move_blast(blast);
                 move_enemy_blast(enemy_blast);
                 move_blast(blast2);
@@ -153,6 +158,7 @@ int run(int level)
                     draw_enemy(enemy);
                     draw_enemy(enemy2);
                     draw_spaceship(s);
+                    draw_unionship(unionship,s,weapen_class);
                     draw_weapen(weapen);
                     draw_blast(blast);
                     draw_blast2(blast2);

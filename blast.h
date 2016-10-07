@@ -6,6 +6,7 @@
 #include "enemy.h"
 
 #define BLAST_NUM  20
+
 typedef struct{
     float sx;
     float sy;

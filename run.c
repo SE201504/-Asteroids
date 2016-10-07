@@ -23,7 +23,8 @@ int run(int level)
     ALLEGRO_TIMER *timer = NULL;//声明计时器
     ALLEGRO_FONT *font24 = NULL;
     ALLEGRO_FONT *font56 = NULL;
-    ALLEGRO_BITMAP *backimage = NULL;
+    ALLEGRO_BITMAP *backimage1 = NULL;
+    ALLEGRO_BITMAP *backimage2 = NULL;
 
 
 
@@ -40,8 +41,8 @@ int run(int level)
     Enemy enemy2[ENEMY_NUMBER];
     Unionship unionship[2];
     Boss *b = (Boss*)malloc(sizeof(Boss));
-
-
+    int h1;
+    int h2;
 
     //显示系统初始化
     if(!al_init()){
@@ -68,7 +69,10 @@ int run(int level)
     display = al_create_display(SCREEN_W,SCREEN_H);
     al_hide_mouse_cursor(display);
 
-    backimage = al_load_bitmap("../nonespace/img/backimage.jpg");
+    backimage1 = al_load_bitmap("../nonespace/img/backimage.jpg");
+    backimage2 = al_load_bitmap("../nonespace/img/backimage.jpg");
+    h1 = al_get_bitmap_height(backimage1);
+    h2 = al_get_bitmap_height(backimage2);
     font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
     font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
 
@@ -125,7 +129,13 @@ int run(int level)
                 al_translate_transform(&transform, 0, 0);
                 al_use_transform(&transform);
 
-                al_draw_bitmap(backimage,0,0,0);
+                h1 +=1;
+                if (h1>SCREEN_H) h1 = -SCREEN_H;
+                h2 -=1;
+                if (h2<-SCREEN_H)  h2 = SCREEN_H;
+                al_draw_bitmap(backimage1,-10,h1,0);
+                al_draw_bitmap(backimage2,-10,-h2,0);
+
 
 
                 s->time++;

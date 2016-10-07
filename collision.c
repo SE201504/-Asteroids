@@ -245,14 +245,14 @@ void boom1(Enemy *e)
 void boss_boom(Boss *e)
 {
     ALGIF_ANIMATION *boom = NULL;
-    boom = algif_load_animation("../nonespace/gif/boom1.gif");
+    boom = algif_load_animation("../nonespace/gif/boom.gif");
 
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);
     al_translate_transform(&transform, e->sx, e->sy);
     al_use_transform(&transform);
 
-    al_draw_bitmap(algif_get_bitmap(boom,3),-75,-75,2);
+    al_draw_bitmap(algif_get_bitmap(boom,3),-30,-30,0);
 }
 
 void spaceship_boom(Spaceship *e)

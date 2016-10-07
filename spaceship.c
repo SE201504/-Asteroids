@@ -123,8 +123,17 @@ void spaceship_hit_weapen(Spaceship *s, Weapen *weapen,int* weapen_class)
 {
     if(weapen->live) {
         if((pow((s->sx - weapen->sx),2) + pow((s->sy - weapen->sy),2))  < 200){
+            if(weapen->type == 1)
+            {
                 weapen->live = false;
+                weapen->time = 0;
                 *weapen_class = 2;
+            } else {
+                weapen->live = false;
+                weapen->time = 0;
+                s->life = 100;
+                s->time = 0;
+            }
         }
     }
 

@@ -125,10 +125,11 @@ int run(int level)
 
                 s->time++;
                 b->time++;
+                weapen->time++;
                 time_plus(enemy,enemy2);
                 runtime++;
 
-                re_init_weapen(weapen,runtime);
+                re_init_weapen(weapen,weapen_class);
                 init_new_enemy(enemy,runtime,level,1);
                 init_new_enemy(enemy2,runtime,level,2);
                 fire_boss_blast(enemy_blast,b);

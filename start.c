@@ -7,6 +7,7 @@
 #include "main.h"
 #include "start.h"
 #include "introduce.h"
+#include "select.h"
 
 int start(void)
 {

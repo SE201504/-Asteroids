@@ -6,7 +6,7 @@
 
 #include "main.h"
 #include "start.h"
-#include "select.h"
+#include "introduce.h"
 
 int start(void)
 {
@@ -21,9 +21,9 @@ int start(void)
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;//声明事件队列
     ALLEGRO_TIMER *timer = NULL;//声明计时器
-    ALLEGRO_FONT *font24 = NULL;
-    ALLEGRO_FONT *font56 = NULL;
+    ALLEGRO_FONT *font100 = NULL;
     ALLEGRO_FONT *font32 = NULL;
+    ALLEGRO_FONT *font40 = NULL;
     ALLEGRO_BITMAP *setbackimage = NULL;//back image
 
 
@@ -51,8 +51,9 @@ int start(void)
     }
 
 
+    font40 = al_load_font("../nonespace/img/kaiti.ttf",40,0);
     font32 = al_load_font("../nonespace/img/kaiti.ttf",32,0);
-    font56 = al_load_font("../nonespace/img/betsy.ttf",100,0);
+    font100 = al_load_font("../nonespace/img/can.ttf",100,0);
     setbackimage = al_load_bitmap("../nonespace/img/start2.jpg");
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
@@ -148,22 +149,22 @@ int start(void)
         {
             if (count % 3 == 0) {
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
-                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
-                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
+                al_draw_text(font32,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
 //                break;
             }
             else if (count % 3 == 1) {
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
-                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
+                al_draw_text(font32,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
             }
             else if (count % 3 == 2) {
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
-                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
-                al_draw_text(font32,al_map_rgb(0,0,255),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*6)/9,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*4)/9,ALLEGRO_ALIGN_CENTER,"模式选择");
+                al_draw_text(font32,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*5)/9,ALLEGRO_ALIGN_CENTER,"游戏介绍");
             }
 
             if((set_keys[ENTER] && count%3 == 0) || click_mouse1 )
@@ -177,6 +178,7 @@ int start(void)
             {
 
                 al_destroy_display(display);
+                introduce_the_game();
             }
             else if((set_keys[ENTER] || click_mouse3) && (count%3 == 2))
             {
@@ -186,8 +188,8 @@ int start(void)
 
             else if(ifselect && al_is_event_queue_empty(event_queue ))
             {
-                al_draw_text(font56,al_map_rgb(100,0,100),(SCREEN_W*2)/5,SCREEN_H/9,ALLEGRO_ALIGN_CENTER,"EXPLOSD");
-                 al_draw_text(font56,al_map_rgb(225,50,0),(SCREEN_W*3)/5,(SCREEN_H*9)/40,ALLEGRO_ALIGN_CENTER,"INVADER");
+                al_draw_text(font100,al_map_rgb(0,180,0),(SCREEN_W*2)/5,SCREEN_H/9,ALLEGRO_ALIGN_CENTER,"BEAT");
+                 al_draw_text(font100,al_map_rgb(0,0,180),(SCREEN_W*3)/5,(SCREEN_H*9)/40,ALLEGRO_ALIGN_CENTER,"ENEMY");
 
 
 
@@ -199,9 +201,9 @@ int start(void)
     al_destroy_timer(timer);
     al_destroy_bitmap(setbackimage);
     al_destroy_event_queue(event_queue);
-    al_destroy_font(font24);
-    al_destroy_font(font56);
+    al_destroy_font(font100);
     al_destroy_font(font32);
+    al_destroy_font(font40);
 
     return 0;
 }

@@ -17,7 +17,7 @@ int restart(int grades)
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;//声明事件队列
     ALLEGRO_TIMER *timer = NULL;//声明计时器
-    ALLEGRO_FONT *font24 = NULL;
+    ALLEGRO_FONT *font40 = NULL;
     ALLEGRO_FONT *font56 = NULL;
     ALLEGRO_FONT *font32 = NULL;
     ALLEGRO_BITMAP *setbackimage = NULL;//back image
@@ -28,7 +28,7 @@ int restart(int grades)
         return -1;
     }
     if(!al_install_mouse()) {
-       return -1;
+        return -1;
     }
     if(!al_init_image_addon()){
         return -1;
@@ -47,9 +47,9 @@ int restart(int grades)
     }
 
 
-    font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
-    font32 = al_load_font("../nonespace/img/fontl.ttf",32,0);
-    font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
+    font40 = al_load_font("../nonespace/img/kaiti.ttf",40,0);
+    font32 = al_load_font("../nonespace/img/kaiti.ttf",32,0);
+    font56 = al_load_font("../nonespace/img/kaiti.ttf",56,0);
     setbackimage = al_load_bitmap("../nonespace/img/start2.jpg");
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
@@ -138,13 +138,13 @@ int restart(int grades)
             switch (count%2) {
             case 0:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Restart>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"重新开始");
+                al_draw_text(font32,al_map_rgb(225,220,220),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"退出游戏");
                 break;
             case 1:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(255,0,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"<Exit>");
-                al_draw_text(font24,al_map_rgb(0,0,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"<Restart>");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"退出游戏");
+                al_draw_text(font32,al_map_rgb(220,220,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"重新开始");
 
                 break;
             }
@@ -165,9 +165,9 @@ int restart(int grades)
 
             else if(ifselect && al_is_event_queue_empty(event_queue ))
             {
-                al_draw_text(font56,al_map_rgb(0,0,0),SCREEN_W/2,SCREEN_H/6,ALLEGRO_ALIGN_CENTER,"GAME OVER!");
-                al_draw_text(font24,al_map_rgb(0,0,0),SCREEN_W/2,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,"SCORE:");
-                al_draw_text(font24,al_map_rgb(0,0,0),SCREEN_W/2+100,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,itoa(grades, str, 10));
+                al_draw_text(font56,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/6,ALLEGRO_ALIGN_CENTER,"GAME OVER!");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,"SCORE:");
+                al_draw_text(font40,al_map_rgb(225,225,225),SCREEN_W/2+100,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,itoa(grades, str, 10));
 
                 al_flip_display();
             }
@@ -177,7 +177,7 @@ int restart(int grades)
     al_destroy_timer(timer);
     al_destroy_bitmap(setbackimage);
     al_destroy_event_queue(event_queue);
-    al_destroy_font(font24);
+    al_destroy_font(font40);
     al_destroy_font(font56);
     al_destroy_font(font32);
 

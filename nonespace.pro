@@ -21,7 +21,8 @@ SOURCES += \
     boss.c \
     collision.c \
     unionship.c \
-    restart.c
+    restart.c \
+    introduce.c
 
 HEADERS += \
     main.h \
@@ -37,7 +38,8 @@ HEADERS += \
     boss.h \
     collision.h \
     unionship.h \
-    restart.h
+    restart.h \
+    introduce.h
 
 DISTFILES +=
 

@@ -69,12 +69,12 @@ int run(int level)
     display = al_create_display(SCREEN_W,SCREEN_H);
     al_hide_mouse_cursor(display);
 
-    backimage1 = al_load_bitmap("../nonespace/img/backimage.jpg");
-    backimage2 = al_load_bitmap("../nonespace/img/backimage.jpg");
-    h1 = al_get_bitmap_height(backimage1);
-    h2 = al_get_bitmap_height(backimage2);
-    font24 = al_load_font("../nonespace/img/fontl.ttf",24,0);
-    font56 = al_load_font("../nonespace/img/fontl.ttf",56,0);
+    backimage1 = al_load_bitmap("../nonespace/img/back.jpg");
+    backimage2 = al_load_bitmap("../nonespace/img/back.jpg");
+    h1 = 0;
+    h2 = SCREEN_H;
+    font24 = al_load_font("../nonespace/img/kaiti.ttf",24,0);
+    font56 = al_load_font("../nonespace/img/kaiti.ttf",56,0);
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
     event_queue = al_create_event_queue();//创建事件队列

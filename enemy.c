@@ -45,36 +45,51 @@ void init_enemy(Enemy a[],int level,int type)
             {
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
-                a[i].speed = 2.5;
                 a[i].life = 0;
                 a[i].time = 0;
                 a[i].live = false;
-                if((rand()%2+1)==1){
+                if(i%3==1){
                 a[i].bitmap = al_load_bitmap("../nonespace/img/enemy0.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
                 a[i].bitmap_h = al_get_bitmap_height(a[i].bitmap);
+                a[i].speed = 2;
                 } else if((rand()%2+1)==2){
                     a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
                     a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
                     a[i].bitmap_h = al_get_bitmap_height(a[i].bitmap);
+                    a[i].speed = 2.5;
                 } else {
                     a[i].bitmap = al_load_bitmap("../nonespace/img/enemy2.png");
                     a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
                     a[i].bitmap_h = al_get_bitmap_height(a[i].bitmap);
+                    a[i].speed = 3;
                 }
             }
-        }else if(level == 2){
+        }else if(level == 2)
+        {
             for(int i = 0; i < ENEMY_NUMBER; i++)
             {
                 a[i].sx = rand()%SCREEN_W+50;
                 a[i].sy = -300;
-                a[i].speed = 3.5;
                 a[i].life = 0;
                 a[i].time = 0;
                 a[i].live = false;
-                a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
+                if(i%3==1){
+                a[i].bitmap = al_load_bitmap("../nonespace/img/enemy0.png");
                 a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
                 a[i].bitmap_h = al_get_bitmap_height(a[i].bitmap);
+                a[i].speed = 2;
+                } else if((rand()%2+1)==2){
+                    a[i].bitmap = al_load_bitmap("../nonespace/img/enemy1.png");
+                    a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
+                    a[i].bitmap_h = al_get_bitmap_height(a[i].bitmap);
+                    a[i].speed = 2.5;
+                } else {
+                    a[i].bitmap = al_load_bitmap("../nonespace/img/enemy2.png");
+                    a[i].bitmap_w = al_get_bitmap_width(a[i].bitmap);
+                    a[i].bitmap_h = al_get_bitmap_height(a[i].bitmap);
+                    a[i].speed = 3;
+                }
             }
         }
     }
@@ -201,8 +216,12 @@ void time_plus(Enemy a[],Enemy b[])
 {
     for(int i = 0; i < ENEMY_NUMBER;i ++)
     {
+        if(a[i].live){
         a[i].time++;
+        }
+        if(b[i].live){
         b[i].time++;
+        }
     }
 }
 

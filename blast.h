@@ -5,7 +5,7 @@
 #include "spaceship.h"
 #include "enemy.h"
 
-#define BLAST_NUM  20
+#define BLAST_NUM  16
 
 typedef struct{
     float sx;

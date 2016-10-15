@@ -4,7 +4,7 @@
 #include "spaceship.h"
 #include "enemy.h"
 
-#define ENEMY_NUMBER 4
+#define ENEMY_NUMBER 3
 #define ENEMY_LIFE_1_1 2
 #define ENEMY_LIFE_1_2 3
 #define ENEMY_LIFE_2_1 1

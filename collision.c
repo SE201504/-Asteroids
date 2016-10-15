@@ -232,7 +232,7 @@ void boom(Enemy *e)
 void boom1(Enemy *e)
 {
     ALGIF_ANIMATION *boom = NULL;
-    boom = algif_load_animation("../nonespace/gif/boom1.gif");
+    boom = algif_load_animation("../nonespace/gif/boom.gif");
 
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);
@@ -258,7 +258,7 @@ void boss_boom(Boss *e)
 void spaceship_boom(Spaceship *e)
 {
     ALGIF_ANIMATION *boom = NULL;
-    boom = algif_load_animation("../nonespace/gif/boom1.gif");
+    boom = algif_load_animation("../nonespace/gif/boom.gif");
 
     ALLEGRO_TRANSFORM transform;
     al_identity_transform(&transform);

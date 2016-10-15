@@ -85,7 +85,7 @@ void fire_boss_blast(Blast blast[],Boss *s)
 {
     if(s->live)
     {
-        if(s->time == 60 * 7){
+        if(s->time/FPS == 7){
             for(int i = 0; i < BLAST_NUM ; i++)
             {
                     blast[i].sx = s->sx;

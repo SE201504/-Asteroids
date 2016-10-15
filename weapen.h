@@ -19,5 +19,6 @@ typedef struct{
 void init_weapen(Weapen *weapen);
 void re_init_weapen(Weapen *weapen, int weapen_class);
 void draw_weapen(Weapen *weapen);
+void move_weapen(Weapen *weapen);
 
 #endif // WEAPEN_H

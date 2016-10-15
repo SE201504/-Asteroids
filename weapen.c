@@ -59,7 +59,16 @@ void draw_weapen(Weapen *weapen)
 
 }
 
-
+void move_weapen(Weapen *weapen)
+{
+        if(weapen->live)
+        {
+            weapen->sy += 2;
+            if(weapen->sy >= SCREEN_H){
+                weapen->live = false;
+            }
+        }
+}
 
 
 

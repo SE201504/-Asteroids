@@ -161,6 +161,7 @@ int run(int level)
                 move_enemy(enemy,s,1);
                 move_enemy(enemy2,s,2);
                 move_boss(b,s,runtime);
+                move_weapen(weapen);
 
 
 

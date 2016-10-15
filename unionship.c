@@ -39,7 +39,7 @@ void draw_unionship(Unionship a[], int weapen_class)
 
     if(a[0].live)
     {
-        al_draw_bitmap(a[0].bitmap,-a[0].bitmap_w/2,-a[0].bitmap_h/2,0);
+        al_draw_bitmap(a[0].bitmap,-a[0].bitmap_w/2 + 30,-a[0].bitmap_h/2 - 20,0);
     }
 
     ALLEGRO_TRANSFORM transforms;
@@ -49,7 +49,7 @@ void draw_unionship(Unionship a[], int weapen_class)
 
     if(a[1].live)
     {
-        al_draw_bitmap(a[1].bitmap,-a[1].bitmap_w/2,-a[1].bitmap_h/2,0);
+        al_draw_bitmap(a[1].bitmap,-a[1].bitmap_w/2 -30,-a[1].bitmap_h/2 - 20,0);
     }
     }
 }
@@ -58,18 +58,18 @@ void fire_union_blast(Blast blast[],Unionship a[],int weapen_class,int runtime)
 {
     if(weapen_class == 2)
     {
-        if(runtime%5 == 1)
+        if(runtime%10 == 1)
         {
             for(int i = 0; i < ENEMY_NUMBER -1;i++)
             {
                 if(!blast[i].live)
                 {
-                    blast[i].sx = a[0].sx;
-                    blast[i].sy = a[0].sy ;
+                    blast[i].sx = a[0].sx + 30;
+                    blast[i].sy = a[0].sy - 30;
                     blast[i].live = true;
 
-                    blast[i+1].sx = a[1].sx;
-                    blast[i+1].sy = a[1].sy;
+                    blast[i+1].sx = a[1].sx - 30;
+                    blast[i+1].sy = a[1].sy - 30;
                     blast[i+1].live = true;
                     break;
                 }

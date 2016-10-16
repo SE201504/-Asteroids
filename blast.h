@@ -18,7 +18,7 @@ typedef struct{
     int bitmap_h;
     int bitmap_w;
 }Blast;
-//
+
 void init_blast(Blast blast[]);// 初始化第一种子弹
 void init_blast2(Blast blast[]);//初始化第二种子弹
 void init_enenmy_blast(Blast blast[], int type);//初始化敌机子弹

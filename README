@@ -7,7 +7,7 @@
 一、游戏说明：这是一个以飞船大战为主要性质的游戏，分为简单和困难两关。游戏中的绿色生命条是飞船自己的生命系数，红色的生命条是boss的生命系数。游戏中每个飞船有三条生命，接到桃心可以获得一条生命，接到火焰可以增强炮弹发射强度等等。 
 二：（1）游戏中的每个.c文件对应一个.h文件，方便查找; 
    （2）游戏中的参数以第一个字母为大写命名;
-   （3）游戏中使用的静态图、字体、音频放在img文件，动态图放在gif文件
+   （3）游戏中使用的静态图、字体、音频放在img文件，动态图放在gif中
 三、游戏函数及函数的参数说明
 blast.h中的
 void init_blast(Blast blast[]);// 初始化第一种子弹，参数为Blast类型
@@ -73,8 +73,8 @@ int selects(void);//游戏难易界面选择函数（参数为空）
 Spaceship.h
 void init_spaceship(Spaceship* s, int level);//初始化飞船(飞船，level不同代表不同关卡，出现的飞船也不同）
 void draw_spaceship(Spaceship *s, int *weapen_class); //画出飞船（飞船，奖励物品）
-void ship_live(Spaceship *s,ALLEGRO_FONT *font); //画出飞船生命条（飞船，生命条显示字体）
 void spaceship_hit_weapen(Spaceship *s , Weapen *weapen, int *weapen_class); //飞船与奖励物品的碰撞检测（飞船，奖励物品，奖励物品类型）
+void ship_live(Spaceship *s,ALLEGRO_FONT *font); //画出飞船生命条（飞船，生命条显示字体）
 void ship_score(Spaceship *s, ALLEGRO_FONT *score); //飞船得分（飞船，得分字体）
 
 char *itoa(int num,char *str,int radix); //int转字符类型

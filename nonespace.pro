@@ -3,7 +3,8 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 INCLUDEPATH += -I/usr/include/allegro5
-LIBS += -lallegro -lallegro_primitives -lallegro_image -lallegro_font -lallegro_ttf -lpthread
+LIBS += -lallegro -lallegro_primitives -lallegro_image -lallegro_font -lallegro_ttf -lpthread -lallegro_audio -lallegro_acodec
+
 
 SOURCES += \
     main.c \

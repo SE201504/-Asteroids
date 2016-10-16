@@ -23,9 +23,11 @@ void hit_enemy(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
                         {
                             a[j].live = false;
                             boom1(&a[j]);
+                            voice();
                         } else {
                             a[j].life --;
                             boom(&a[j]);
+                            voice();
                         }
 
                         blast[i].live = false;
@@ -40,9 +42,11 @@ void hit_enemy(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
                         {
                             b[j].live = false;
                             boom1(&b[j]);
+                            voice();
                         } else {
                             b[j].life --;
                             boom(&b[j]);
+                            voice();
                         }
                         blast[i].live = false;
                         s->score +=200;
@@ -76,9 +80,11 @@ void hit_enemy2(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
                         {
                             a[j].live = false;
                             boom1(&a[j]);
+                            voice();
                         } else {
                             a[j].life --;
                             boom(&a[j]);
+                            voice();
                         }
                         s->score +=100;
                     }
@@ -98,9 +104,11 @@ void hit_enemy2(Blast blast[],Enemy a[],Enemy b[], Spaceship *s)
                         {
                             b[j].live = false;
                             boom1(&b[j]);
+                            voice();
                         } else {
                             b[j].life --;
                             boom(&b[j]);
+                            voice();
                         }
                         s->score +=200;
                     }
@@ -130,6 +138,7 @@ void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s)
 
                     blast[i].live = false;
                     s->score +=1000;
+                    voice();
                 }
             }
         }
@@ -156,6 +165,7 @@ void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s)
                         b->life --;
                     }
                     s->score +=100;
+                    voice();
                 }
             }
         }
@@ -173,6 +183,7 @@ void hit_spaceship(Blast blast[],Spaceship *s)
                 s->life -=10 ;
                 spaceship_boom(s);
                 blast[i].live = false;
+                voice();
             }
         }
     }
@@ -189,6 +200,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
                 s->life-=10 ;
                 a[i].live = false;
                 spaceship_boom(s);
+                voice();
             }
         }
         if(b[i].live)
@@ -198,6 +210,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
                 s->life-=10 ;
                 b[i].live = false;
                 spaceship_boom(s);
+                voice();
             }
         }
         if(boss->live)
@@ -207,6 +220,7 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss)
                 s->life -=10 ;
                 boss->live = false;
                 spaceship_boom(s);
+                voice();
             }
         }
     }
@@ -249,4 +263,38 @@ void spaceship_boom(Spaceship *e)
     al_translate_transform(&transform, e->sx, e->sy);
     al_use_transform(&transform);
     al_draw_bitmap(algif_get_bitmap(boom,al_get_time()),-75,-75,2);
+}
+
+void voice(void)
+{
+    ALLEGRO_SAMPLE *sample=NULL;
+
+    if(!al_init()){
+       fprintf(stderr, "failed to initialize allegro!\n");
+       return -1;
+    }
+
+    if(!al_install_audio()){
+       fprintf(stderr, "failed to initialize audio!\n");
+       return -1;
+    }
+
+    if(!al_init_acodec_addon()){
+       fprintf(stderr, "failed to initialize audio codecs!\n");
+       return -1;
+    }
+
+    if (!al_reserve_samples(1)){
+       fprintf(stderr, "failed to reserve samples!\n");
+       return -1;
+    }
+
+    sample = al_load_sample( "../nonespace/img/pong.wav" );
+
+    if (!sample){
+       printf( "Audio clip sample not loaded!\n" );
+       return -1;
+    }
+
+    al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 }

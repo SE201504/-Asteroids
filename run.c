@@ -43,6 +43,7 @@ int run(int level)
     Boss *b = (Boss*)malloc(sizeof(Boss));
     int h1;
     int h2;
+    int backimage2_heigh;
 
     //显示系统初始化
     if(!al_init()){
@@ -72,7 +73,8 @@ int run(int level)
     backimage1 = al_load_bitmap("../nonespace/img/back.jpg");
     backimage2 = al_load_bitmap("../nonespace/img/back.jpg");
     h1 = 0;
-    h2 = SCREEN_H;
+    h2 = al_get_bitmap_height(backimage2);
+    backimage2_heigh = al_get_bitmap_height(backimage2);
     font24 = al_load_font("../nonespace/img/kaiti.ttf",24,0);
     font56 = al_load_font("../nonespace/img/kaiti.ttf",56,0);
 
@@ -111,7 +113,8 @@ int run(int level)
             al_wait_for_event(event_queue,&event);//把事件队列里的事件装入事件 event
 
             if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
-//                al_clear_to_color(al_map_rgb(0,0,0));
+                al_clear_to_color(al_map_rgb(0,0,0));
+                al_destroy_display(display);
                 break;
             }
             else if(event.type == ALLEGRO_EVENT_MOUSE_AXES){
@@ -130,9 +133,9 @@ int run(int level)
                 al_use_transform(&transform);
 
                 h1 +=1;
-                if (h1>SCREEN_H) h1 = -SCREEN_H;
+                if (h1>backimage2_heigh) h1 = -backimage2_heigh + 10;
                 h2 -=1;
-                if (h2<-SCREEN_H)  h2 = SCREEN_H;
+                if (h2< -backimage2_heigh)  h2 = backimage2_heigh - 10;
                 al_draw_bitmap(backimage1,-10,h1,0);
                 al_draw_bitmap(backimage2,-10,-h2,0);
 
@@ -213,7 +216,7 @@ int run(int level)
     al_destroy_font(font24);
     al_destroy_font(font56);
 
-    while(!doexit)
+    if(!doexit)
         restart(s->score);
     return 0;
 }

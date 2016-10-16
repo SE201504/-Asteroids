@@ -73,6 +73,7 @@ int start(void)
     while(ifselect)
     {
         ALLEGRO_EVENT event;
+        int d_w;
         int dx;
         int dy;
         int dz;
@@ -121,21 +122,25 @@ int start(void)
             break;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_AXES || event.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY){
+            d_w = event.mouse.x - SCREEN_W/2;
             dx = event.mouse.y - (SCREEN_H*4)/9;
             dy = event.mouse.y - (SCREEN_H*5)/9;
             dz = event.mouse.y - (SCREEN_H*6)/9;
+            if(dx > -25 && dx <25 && d_w > -40 && d_w < 40) count = 0;
+            if(dy > -25 && dy <25 && d_w > -40 && d_w < 40) count = 1;
+            if(dz > -25 && dz <25 && d_w > -40 && d_w < 40) count = 2;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-            if(dx > -30 && dx <30){
+            if(dx > -25 && dx <25 && d_w > -40 && d_w < 40){
                 click_mouse1=true;
                 count = 0;
             }
 
-            if(dy > -30 && dy <30){
+            if(dy > -25 && dy <25 && d_w > -40 && d_w < 40){
                 click_mouse2=true;
                 count = 1;
             }
-            if(dz > -30 && dz <30){
+            if(dz > -25 && dz <25 && d_w > -40 && d_w < 40){
                 click_mouse3=true;
                 count = 2;
             }

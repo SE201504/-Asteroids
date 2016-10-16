@@ -71,7 +71,9 @@ int selects(void)
     while(ifrun)
     {
         ALLEGRO_EVENT event;
-        int dz,dy;
+        int dz;
+        int dy;
+        int d_w;
 
         al_wait_for_event(event_queue,&event);//把事件队列里的事件装入事件 event
         if(event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -113,19 +115,23 @@ int selects(void)
 
         else if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
             al_clear_to_color(al_map_rgb(0,0,0));
+            al_destroy_display(display);
             break;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_AXES || event.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY){
+            d_w = event.mouse.x - SCREEN_W/2;
             dy = event.mouse.y - (SCREEN_H*2)/5;
             dz = event.mouse.y - (SCREEN_H*3)/5;
+            if(dy > -25 && dy < 25 && d_w > -40 && d_w < 40) count = 0;
+            if(dz > -25 && dz < 25 && d_w > -40 && d_w < 40) count = 1;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-            if(dy > -30 && dy <30){
+            if(dy > -25 && dy < 25 && d_w > -40 && d_w < 40){
                 click_mouse1=true;
-            count = 0;
+                count = 0;
             }
 
-            if(dz > -30 && dz <30){
+            if(dz > -25 && dz < 25 && d_w > -40 && d_w < 40){
                 click_mouse2=true;
                 count = 1;
             }
@@ -137,19 +143,16 @@ int selects(void)
         }
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
-            switch (count%2) {
-            case 0:
+            if (count%2 == 0) {
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*2)/5,ALLEGRO_ALIGN_CENTER,"简单");
                 al_draw_text(font40,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*3)/5,ALLEGRO_ALIGN_CENTER,"困难");
-
-                break;
-            case 1:
+                al_draw_bitmap(algif_get_bitmap(gif, al_get_time()), 200, 200, 0);
+            }else if(count%2 ==1){
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font32,al_map_rgb(225,225,255),SCREEN_W/2,(SCREEN_H*2)/5,ALLEGRO_ALIGN_CENTER,"简单");
                 al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*3)/5,ALLEGRO_ALIGN_CENTER,"困难");
-
-                break;
+                al_draw_bitmap(algif_get_bitmap(gif, al_get_time()), 200,320,0);
             }
 
 
@@ -172,14 +175,13 @@ int selects(void)
             else if(ifrun && al_is_event_queue_empty(event_queue ))
             {
                 al_draw_text(font100,al_map_rgb(0,0,180),SCREEN_W/2,SCREEN_H/6,ALLEGRO_ALIGN_CENTER,"<Asteroids>");
-                al_draw_bitmap(algif_get_bitmap(gif,al_get_time()),200, 200, 0);
-
                 al_flip_display();
             }
         }
 
     }
     al_destroy_timer(timer);
+    algif_destroy_bitmap(gif);
     al_destroy_bitmap(setbackimage);
     al_destroy_event_queue(event_queue);
     al_destroy_font(font40);

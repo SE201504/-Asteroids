@@ -1,0 +1,161 @@
+游戏名称：家园生死保卫战
+游戏类型：飞船大战/休闲小游戏
+开发人员：代雨柔、黄建舟、郑皓月
+开发人员组数：2015级开源4组
+编写所用语言类型：c语言
+
+一、游戏说明：这是一个以飞船大战为主要性质的游戏，分为简单和困难两关。游戏中的绿色生命条是飞船自己的生命系数，红色的生命条是boss的生命系数。游戏中每个飞船有三条生命，接到桃心可以获得一条生命，接到火焰可以增强炮弹发射强度等等。 
+二：（1）游戏中的每个.c文件对应一个.h文件，方便查找; 
+   （2）游戏中的参数以第一个字母为大写命名;
+   （3）游戏中使用的静态图、字体、音频放在img文件，动态图放在gif文件
+三、游戏函数及函数的参数说明
+blast.h中的
+void init_blast(Blast blast[]);// 初始化第一种子弹，参数为Blast类型
+void init_blast2(Blast blast[]);//初始化第二种子弹，参数为Blast类型
+void init_enenmy_blast(Blast blast[], int type);//初始化敌机子弹，（blast类型，子弹类型）
+void init_boss_blast(Blast blast[]);//初始化boss子弹，参数为Blast类型
+void fire_blast(Blast blast[], Blast blast2[], Spaceship *s, int weapen);//发射飞船子弹（第一种Blast类型，为第二种Blast类型，飞船，武器种类）
+void fire_enemy_blast(Blast blast[], Blast blast2[], Enemy a[], Enemy b[]);//发射敌机子弹（第一种Blast类型，为第二种Blast类型，敌机1,敌机2）
+void draw_blast(Blast blast[]);//画出第一种子弹，参数为Blast类型
+void draw_blast2(Blast blast[]);//画出第二种子弹，参数为Blast类型
+void move_blast(Blast blast[]);//移动飞船子弹，参数为Blast类型
+void move_enemy_blast(Blast blast[]);// 移动敌机子弹，参数为Blast类型
+void move_boss_blast(Blast blast[]);// 移动boss子弹，参数为Blast类型
+void check(Blast blast[]);//检查子弹越界,参数为Blast类型
+
+
+boss.h
+void init_boss(Boss *s,int level); //初始化boss子弹(boss类型，游戏水平选择）
+void draw_boss(Boss *s, Spaceship *a, int runtime); //画出boss（boss类型，Spaceship类型，生存时间）
+void move_boss(Boss *b, Spaceship *s, int runtime);  //移动boss（boss类型，Spaceship类型，生存时间）
+void boss_hit_spaceship(Spaceship *s,Blast blast[]);  //boss的子弹和飞船的碰撞检测（Spaceship类型，为Blast类型）
+void fire_boss_blast(Blast blast[],Boss *s); //发射boss子弹（Blast类型，boss类型）
+
+
+
+collisoion.h
+void hit_enemy(Blast blast[], Enemy a[],Enemy b[], Spaceship *s);//飞船子弹与敌机碰撞检测(为Blast类型,敌机一，敌机二，飞船类型)
+void hit_enemy2(Blast blast[], Enemy a[],Enemy b[], Spaceship *s);//飞船子弹与敌机碰撞检测(为Blast类型,敌机一，敌机二，飞船类型)
+void hit_boss(Blast blast[], Blast blast2[], Boss *b, Spaceship *s);//飞船子弹与BOSS碰撞检测（为Blast类型，为Blast类型，Boss类型，飞船）
+void hit_spaceship(Blast blast[],Spaceship *s); //敌机子弹与飞船的碰撞检测（子弹的参数，飞船的参数）
+void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss); //敌机与飞船的碰撞检测（飞船的参数，敌机1,敌机2,Boss参数）
+
+void boom(Enemy *e);//爆炸效果（敌机参数）
+void boom1(Enemy *e);//爆炸效果（敌机参数）
+void spaceship_boom(Spaceship *e);//爆炸效果（飞船参数）
+
+
+
+enemy.h
+void init_enemy(Enemy a[], int level, int type);//初始化敌机(敌机参数，游戏难易程度选择参数，敌机类型）
+void draw_enemy(Enemy a[]);//画出敌机（敌机的参数）
+void move_enemy(Enemy a[],Spaceship *s,int type);//移动敌机（Enemy类型，飞船类型参数，选择类型）
+void init_new_enemy(Enemy a[], int runtime, int level, int type); //重新初始化敌机（敌机，生存时间，游戏难度，选择类型）
+void time_plus(Enemy a[],Enemy b[]);//敌机存在时间计算（敌机1,敌机2）
+
+
+introduce.h
+int introduce_the_game(void);//游戏介绍（参数为空）
+
+
+restart.h
+int restart(int grades);//游戏循环，重新开始（游戏分数）
+
+
+run.h
+int run(int level);//游戏主体运行函数（游戏难易，level值不同，选择不同关卡）
+
+
+select.h
+int selects(void);//游戏难易界面选择函数（参数为空）
+
+
+Spaceship.h
+void init_spaceship(Spaceship* s, int level);//初始化飞船(飞船，level不同代表不同关卡，出现的飞船也不同）
+void draw_spaceship(Spaceship *s, int *weapen_class); //画出飞船（飞船，奖励物品）
+void ship_live(Spaceship *s,ALLEGRO_FONT *font); //画出飞船生命条（飞船，生命条显示字体）
+void spaceship_hit_weapen(Spaceship *s , Weapen *weapen, int *weapen_class); //飞船与奖励物品的碰撞检测（飞船，奖励物品，奖励物品类型）
+void ship_score(Spaceship *s, ALLEGRO_FONT *score); //飞船得分（飞船，得分字体）
+
+char *itoa(int num,char *str,int radix); //int转字符类型
+
+
+start.h
+int start(void);//开始函数（无参数）
+
+
+unionship.h
+void init_unionship(Unionship a[]);//初始化僚机，僚机是飞船吃了东西后的加强小飞机（僚机的参数）
+void draw_unionship(Unionship a[], int weapen_class);//画僚机（僚机类型，礼品）
+void fire_union_blast(Blast blast[],Unionship a[],int weapen_class,int runtime);//僚机发射子弹（子弹，僚机，奖励物品类型，生存时间）
+void move_unionship(Unionship a[],Spaceship *s);//移动僚机（僚机，飞船）
+
+
+
+weapen.h
+void init_weapen(Weapen *weapen); //初始化奖励物品(Weapen类型)
+void re_init_weapen(Weapen *weapen, int weapen_class); //重新初始化奖励物品（Weapen类型，礼品选择)
+void draw_weapen(Weapen *weapen); //画出奖励物品（Weapen类型）
+void move_weapen(Weapen *weapen); //移动奖励物品（Weapen类型）
+
+
+四、结构体说明
+
+//子弹结构体
+typedef struct{
+    float sx;//子弹x坐标
+    float sy;//子弹y坐标
+    bool live;//生命
+    float speed;//速度
+    float heading;//朝向
+    ALLEGRO_COLOR color;//颜色
+    ALLEGRO_BITMAP *bitmap;//位图
+    int bitmap_h;//位图的高
+    int bitmap_w;//位图的宽
+}Blast;
+
+
+//boss结构体
+typedef struct{
+    float sx;//x坐标
+    float sy;//y坐标
+    float speed;//速度
+    bool live;//生命
+    int life;//生命条数
+    int time;//时间
+    ALLEGRO_COLOR color;//颜色
+    ALLEGRO_BITMAP *bitmap;//位图
+    int bitmap_h;//位图的高
+    int bitmap_w;//位图的宽
+} Boss;
+
+
+//敌机结构体
+typedef struct{
+    float sx;//x坐标
+    float sy;//y坐标
+    float speed;//速度
+    bool live;//生命
+    int life;//生命条数
+    int time;//时间
+    ALLEGRO_COLOR color;//颜色
+    ALLEGRO_BITMAP *bitmap;//位图
+    ALLEGRO_BITMAP *bitmap_s;//位图
+    int bitmap_h;//位图的高
+    int bitmap_w;//位图的宽
+
+} Enemy;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -68,7 +68,9 @@ int restart(int grades)
     while(ifselect)
     {
         ALLEGRO_EVENT event;
-        int dz,dy;
+        int dz;
+        int dy;
+        int d_w;
 
         al_wait_for_event(event_queue,&event);//把事件队列里的事件装入事件 event
         if(event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -114,16 +116,19 @@ int restart(int grades)
             break;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_AXES || event.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY){
+            d_w = event.mouse.x - SCREEN_W/2;
             dy = event.mouse.y - SCREEN_H/3;
             dz = event.mouse.y - SCREEN_H/2;
+            if(dy > -25 && dy <25 && d_w > -40 && d_w < 40) count = 0;
+            if(dz > -25 && dz <25 && d_w > -40 && d_w < 40) count = 1;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
-            if(dy > -30 && dy <30){
+            if(dy > -25 && dy <25 && d_w > -40 && d_w < 40){
                 click_mouse1=true;
-            count = 0;
+                count = 0;
             }
 
-            if(dz > -30 && dz <30){
+            if(dz > -25 && dz <25 && d_w > -40 && d_w < 40){
                 click_mouse2=true;
                 count = 1;
             }
@@ -135,18 +140,14 @@ int restart(int grades)
         }
         else if(event.type == ALLEGRO_EVENT_TIMER)
         {
-            switch (count%2) {
-            case 0:
+            if (count%2 == 0) {
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"重新开始");
                 al_draw_text(font32,al_map_rgb(225,220,220),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"退出游戏");
-                break;
-            case 1:
+            }else if(count%2 == 1){
                 al_draw_bitmap(setbackimage,0,0,0);
                 al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"退出游戏");
                 al_draw_text(font32,al_map_rgb(220,220,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"重新开始");
-
-                break;
             }
 
 

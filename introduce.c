@@ -11,6 +11,7 @@
 int introduce_the_game(void)
 {
     bool doexit = false;
+    bool click_mouse1 = false;
     enum SET_KEYS{ESCAPE, ENTER};
     bool set_keys[2] = {false, false};
     ALLEGRO_DISPLAY *display = NULL;
@@ -18,6 +19,9 @@ int introduce_the_game(void)
     ALLEGRO_TIMER *timer = NULL;//声明计时器
     ALLEGRO_FONT *font32 = NULL;
     ALLEGRO_BITMAP *setbackimage = NULL;//back image
+    ALLEGRO_BITMAP *reback = NULL;
+
+
     int m4 = SCREEN_H / 2;
 
     if(!al_init()){
@@ -44,6 +48,7 @@ int introduce_the_game(void)
 
     font32 = al_load_font("../nonespace/img/kaiti.ttf",32,0);
     setbackimage = al_load_bitmap("../nonespace/img/start2.jpg");
+    reback = al_load_bitmap("../nonespace/img/reback.png");
 
 
     timer = al_create_timer(1.0 / FPS);//创建计时器
@@ -62,6 +67,7 @@ int introduce_the_game(void)
     while(!doexit)
     {
 
+        int dx;
         al_wait_for_event(event_queue,&event);//把事件队列里的事件装入事件 event
 
 
@@ -72,13 +78,24 @@ int introduce_the_game(void)
             break;
 
         }
+        else if(event.type == ALLEGRO_EVENT_MOUSE_AXES || event.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY){
+            dx = event.mouse.y - 4;
+        }
+        else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
+            if(dx > -50 && dx < 50){
+                click_mouse1=true;
+            }
+
+        }
+        else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+            click_mouse1 = false;
+        }
         else if(event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
             switch(event.keyboard.keycode)
             {
             case ALLEGRO_KEY_ESCAPE:
                 set_keys[ESCAPE] = true;
-//                doexit = true;
                 break;
             }
 
@@ -96,6 +113,7 @@ int introduce_the_game(void)
         if(al_is_event_queue_empty(event_queue))
         {
             al_draw_bitmap(setbackimage, 0, 0 ,0);
+            al_draw_bitmap(reback,4,4,0);
 
             ALLEGRO_TRANSFORM transform;
             al_identity_transform(&transform);
@@ -103,19 +121,22 @@ int introduce_the_game(void)
             al_use_transform(&transform);
 
             m4--;
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4,ALLEGRO_ALIGN_CENTER,"long long ago");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+150,ALLEGRO_ALIGN_CENTER,"It's a beautiful...");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+300,ALLEGRO_ALIGN_CENTER,"but...");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+450,ALLEGRO_ALIGN_CENTER,"......");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+600,ALLEGRO_ALIGN_CENTER,"fiifhi");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+750,ALLEGRO_ALIGN_CENTER,"break out ");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+900,ALLEGRO_ALIGN_CENTER,"stop ");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1050,ALLEGRO_ALIGN_CENTER,"start ");
-            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1200,ALLEGRO_ALIGN_CENTER,"向着胜利出发了!");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4,ALLEGRO_ALIGN_CENTER,"一颗叫做“多美星”的星球");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+100,ALLEGRO_ALIGN_CENTER,"星球原住民多美星人在自己的家园中无忧无虑的生活着");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+200,ALLEGRO_ALIGN_CENTER,"但多美星上空突然出现的巨大时空裂缝");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+300,ALLEGRO_ALIGN_CENTER,"无数邪恶的异次元生物从时空裂缝中来到了这个世界");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+400,ALLEGRO_ALIGN_CENTER,"妄图毁灭整个银河系");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+500,ALLEGRO_ALIGN_CENTER,"面对毁灭");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+600,ALLEGRO_ALIGN_CENTER,"多美星人决定找一位勇士将时空裂缝封印");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+700,ALLEGRO_ALIGN_CENTER,"于是");
+            al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+800,ALLEGRO_ALIGN_CENTER,"一场勇士与恶势力的战争拉开了序幕......");
+             al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+900,ALLEGRO_ALIGN_CENTER,"点击鼠标左键发射子弹,移动鼠标可以移动飞船");
+             al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1000,ALLEGRO_ALIGN_CENTER,"接到桃心、火焰等可以增加对应的生命值及炮弹发射强度");
+             al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1100,ALLEGRO_ALIGN_CENTER,"接下来，时间交给你.");
 
             al_flip_display();
         }
-        if(set_keys[ESCAPE] && event.type == ALLEGRO_EVENT_TIMER) {
+        if((set_keys[ESCAPE] || click_mouse1) && event.type == ALLEGRO_EVENT_TIMER) {
             doexit = true;
             al_destroy_display(display);
             start();
@@ -127,6 +148,7 @@ int introduce_the_game(void)
 
     al_destroy_timer(timer);
     al_destroy_bitmap(setbackimage);
+    al_destroy_bitmap(reback);
     al_destroy_event_queue(event_queue);
     al_destroy_font(font32);
 

@@ -111,7 +111,7 @@ int run(int level)
             al_wait_for_event(event_queue,&event);//把事件队列里的事件装入事件 event
 
             if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE){
-                al_clear_to_color(al_map_rgb(0,0,0));
+//                al_clear_to_color(al_map_rgb(0,0,0));
                 break;
             }
             else if(event.type == ALLEGRO_EVENT_MOUSE_AXES){

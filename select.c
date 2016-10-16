@@ -116,8 +116,8 @@ int selects(void)
             break;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_AXES || event.type == ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY){
-            dy = event.mouse.y - SCREEN_H/3;
-            dz = event.mouse.y - SCREEN_H/2;
+            dy = event.mouse.y - (SCREEN_H*2)/5;
+            dz = event.mouse.y - (SCREEN_H*3)/5;
         }
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
             if(dy > -30 && dy <30){
@@ -140,13 +140,14 @@ int selects(void)
             switch (count%2) {
             case 0:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"简单");
-                al_draw_text(font32,al_map_rgb(225,225,255),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"困难");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*2)/5,ALLEGRO_ALIGN_CENTER,"简单");
+                al_draw_text(font40,al_map_rgb(225,225,225),SCREEN_W/2,(SCREEN_H*3)/5,ALLEGRO_ALIGN_CENTER,"困难");
+
                 break;
             case 1:
                 al_draw_bitmap(setbackimage,0,0,0);
-                al_draw_text(font32,al_map_rgb(225,225,255),SCREEN_W/2,SCREEN_H/3,ALLEGRO_ALIGN_CENTER,"简单");
-                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/2,ALLEGRO_ALIGN_CENTER,"困难");
+                al_draw_text(font32,al_map_rgb(225,225,255),SCREEN_W/2,(SCREEN_H*2)/5,ALLEGRO_ALIGN_CENTER,"简单");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,(SCREEN_H*3)/5,ALLEGRO_ALIGN_CENTER,"困难");
 
                 break;
             }

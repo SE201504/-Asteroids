@@ -166,7 +166,7 @@ int restart(int grades)
             else if(ifselect && al_is_event_queue_empty(event_queue ))
             {
                 al_draw_text(font56,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/6,ALLEGRO_ALIGN_CENTER,"GAME OVER!");
-                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,"SCORE:");
+                al_draw_text(font40,al_map_rgb(0,180,0),SCREEN_W/2,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,"SCORE:     ");
                 al_draw_text(font40,al_map_rgb(225,225,225),SCREEN_W/2+100,SCREEN_H/1.5,ALLEGRO_ALIGN_CENTER,itoa(grades, str, 10));
 
                 al_flip_display();

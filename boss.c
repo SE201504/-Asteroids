@@ -17,7 +17,7 @@ void init_boss(Boss *s,int level)
     {
     s->bitmap = al_load_bitmap("../nonespace/img/boss.png");
     } else {
-        s->bitmap = al_load_bitmap("../nonespace/img/boss.png");
+        s->bitmap = al_load_bitmap("../nonespace/img/boss2.png");
     }
     s->bitmap_w = al_get_bitmap_width(s->bitmap);
     s->bitmap_h = al_get_bitmap_height(s->bitmap);

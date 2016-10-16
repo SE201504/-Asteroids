@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#define WEAPEN_APPEAR 10
+#define WEAPEN_APPEAR 10 //奖励物品出现时间
 
 typedef struct{
     float sx;
@@ -16,9 +16,9 @@ typedef struct{
     int bitmap_w;
 } Weapen;
 
-void init_weapen(Weapen *weapen);
-void re_init_weapen(Weapen *weapen, int weapen_class);
-void draw_weapen(Weapen *weapen);
-void move_weapen(Weapen *weapen);
+void init_weapen(Weapen *weapen); //初始化奖励物品
+void re_init_weapen(Weapen *weapen, int weapen_class); //重新初始化奖励物品
+void draw_weapen(Weapen *weapen); //画出奖励物品
+void move_weapen(Weapen *weapen); //移动奖励物品
 
 #endif // WEAPEN_H

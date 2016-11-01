@@ -6,7 +6,7 @@
 #include "blast.h"
 
 
-#define BOSS_TIME 40 //定义boss出现时间
+#define BOSS_TIME 100 //定义boss出现时间
 
 typedef struct{
     float sx;

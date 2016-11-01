@@ -5,7 +5,7 @@
 #include "spaceship.h"
 #include "enemy.h"
 
-#define BLAST_NUM  16 //定义最大子弹数目
+#define BLAST_NUM  20 //定义最大子弹数目
 
 typedef struct{
     float sx;

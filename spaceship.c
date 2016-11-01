@@ -137,7 +137,6 @@ void spaceship_hit_weapen(Spaceship *s, Weapen *weapen,int* weapen_class)
                 weapen->live = false;
                 weapen->time = 0;
                 s->life = 100;
-                s->time = 0;
             }
         }
     }

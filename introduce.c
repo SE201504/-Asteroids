@@ -133,6 +133,8 @@ int introduce_the_game(void)
              al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+900,ALLEGRO_ALIGN_CENTER,"点击鼠标左键发射子弹,移动鼠标可以移动飞船");
              al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1000,ALLEGRO_ALIGN_CENTER,"接到桃心、火焰等可以增加对应的生命值及炮弹发射强度");
              al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1100,ALLEGRO_ALIGN_CENTER,"接下来，时间交给你.");
+             al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1200,ALLEGRO_ALIGN_CENTER,"Creat by SE2015-04.");
+             al_draw_text(font32,al_map_rgb(220,220,220),SCREEN_W/2.0,m4+1300,ALLEGRO_ALIGN_CENTER,"PROGRAMMER:Sigured eva derli .");
 
             al_flip_display();
         }

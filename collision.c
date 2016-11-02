@@ -265,7 +265,7 @@ void spaceship_boom(Spaceship *e)
     al_draw_bitmap(algif_get_bitmap(boom,al_get_time()),-75,-75,2);
 }
 
-void voice(void)
+int voice(void)
 {
     ALLEGRO_SAMPLE *sample=NULL;
 
@@ -297,4 +297,5 @@ void voice(void)
     }
 
     al_play_sample(sample, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
+    return 0;
 }

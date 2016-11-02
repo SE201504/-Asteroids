@@ -18,6 +18,6 @@ void crash_spaceship(Spaceship *s,Enemy a[],Enemy b[],Boss *boss); //敌机与�
 void boom(Enemy *e);//爆炸效果
 void boom1(Enemy *e);//爆炸效果
 void spaceship_boom(Spaceship *e);//爆炸效果
-void voice(void);
+int voice(void);
 
 #endif // COLLISION_H
